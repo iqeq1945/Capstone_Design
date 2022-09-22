@@ -1,0 +1,37 @@
+{
+  "name": "capstone_design",
+  "version": "1.0.0",
+  "description": "캡스톤디자인 졸업작품 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node ./src/index.js --delay 2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iqeq1945/Capstone_Design.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iqeq1945/Capstone_Design/issues"
+  },
+  "homepage": "https://github.com/iqeq1945/Capstone_Design#readme",
+  "dependencies": {
+    "@prisma/client": "^4.3.1",
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "method-override": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
+    "@babel/node": "^7.19.1",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.19.1",
+    "babel-loader": "^8.2.5",
+    "dotenv": "^16.0.2",
+    "prisma": "^4.3.1"
+  }
+}
