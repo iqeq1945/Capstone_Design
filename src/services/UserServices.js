@@ -13,21 +13,21 @@ export const SingUp = async (req, res, next) => {
       !req.body.passwordConfirmation
     ) {
       res.data = resFormat.fail(403, "입력되지 않은 정보가 있습니다.");
-      return res.render("home/signup", { errors: res.data.message });
+      return res.render("user/signup", { errors: res.data.message });
     }
     const exUserName = await UserRepository.findByName(req.body.name);
     if (exUserName) {
       res.data = resFormat.fail(403, "이미 가입된 닉네임입니다.");
-      return res.render("home/signup", { errors: res.data.message });
+      return res.render("user/signup", { errors: res.data.message });
     }
     const exUserEmail = await UserRepository.findByEmail(req.body.email);
     if (exUserEmail) {
       res.data = resFormat.fail(403, "이미 가입된 이메일입니다.");
-      return res.render("home/signup", { errors: res.data.message });
+      return res.render("user/signup", { errors: res.data.message });
     }
     if (req.body.password != req.body.passwordConfirmation) {
       res.data = resFormat.fail(403, "비밀번호를 다시확인하세요.");
-      return res.render("home/signup", { errors: res.data.message });
+      return res.render("user/signup", { errors: res.data.message });
     }
     const hashPassword = await bcrypt.hash(req.body.password, 12);
 
@@ -51,7 +51,7 @@ export const SingUp = async (req, res, next) => {
             "회원가입 및 로그인 성공",
             user
           );
-          res.render("home/welcome");
+          res.redirect("/");
           return;
         });
       })(req, res, next);
@@ -71,7 +71,7 @@ export const Login = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.render("home/login", {
+      return res.render("user/login", {
         email: req.body.email,
         errors: info.message,
       });

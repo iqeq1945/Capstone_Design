@@ -1,0 +1,81 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3 mt-3">
+      <form class="user-form" action="/users" method="post">
+        <fieldset disabled>
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="text"
+                id="name"
+                name="name"
+                value="<%= user.name %>"
+              />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input
+                class="form-control"
+                type="text"
+                id="email"
+                name="email"
+                value="<%= user.email %>"
+              />
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <h3 class="contentBoxTop">내 작품 목록</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">작품 이름</th>
+            <th scope="col">연재 횟수</th>
+            <th scope="col">연재 목록</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="location.href='/novels'"
+      >
+        새 작품 쓰기
+      </button>
+    </div>
+  </body>
+</html>
