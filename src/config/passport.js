@@ -1,6 +1,4 @@
 // config/passport.js
-
-import passport from "passport";
 import * as UserRepository from "../repositories/UserRepository";
 import passportLocal from "passport-local";
 import bcrypt from "bcrypt";

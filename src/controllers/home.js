@@ -8,9 +8,7 @@ Router.get("/", function (req, res) {
 });
 
 Router.get("/login", AuthHandler.isNotLoggedIn, function (req, res) {
-  let email = req.user.email || "";
-  let errors = res.errors || "";
-  res.render("home/login", { email: email, errors: errors });
+  res.render("user/login");
 });
 
 Router.get("/logout", AuthHandler.isLoggedIn, UserServices.LogOut);

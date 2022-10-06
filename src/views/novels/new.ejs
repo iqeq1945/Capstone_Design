@@ -1,0 +1,65 @@
+<!-- views/posts/new.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <div class="container mb-3 mt-5">
+      <h3>새 작품 등록</h3>
+      <form action="/novels" method="post">
+        <div class="form-group">
+          연재 주기
+          <label><input type="checkbox" name="cycle" value="월" /> 월</label>
+          <label><input type="checkbox" name="cycle" value="화" /> 화</label>
+          <label><input type="checkbox" name="cycle" value="수" /> 수</label>
+          <label><input type="checkbox" name="cycle" value="목" /> 목</label>
+          <label><input type="checkbox" name="cycle" value="금" /> 금</label>
+          <label><input type="checkbox" name="cycle" value="토" /> 토</label>
+          <label><input type="checkbox" name="cycle" value="일" /> 일</label>
+          <label
+            ><input type="checkbox" name="cycle" value="자유" /> 자유</label
+          >
+        </div>
+        <div class="form-group">
+          장르
+          <label
+            ><input type="radio" name="category" value="판타지" /> 판타지</label
+          >
+          <label
+            ><input type="radio" name="category" value="로맨스" /> 로맨스</label
+          >
+          <label
+            ><input type="radio" name="category" value="무협" /> 무협</label
+          >
+        </div>
+        <div class="form-group">
+          <label for="title">제목</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value=""
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="content">작품소개</label>
+          <textarea
+            id="content"
+            name="content"
+            rows="5"
+            class="form-control"
+          ></textarea>
+        </div>
+
+        <div>
+          <a class="btn btn-primary" href="/users">Back</a>
+          <button type="submit" class="btn btn-primary">등록하기</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

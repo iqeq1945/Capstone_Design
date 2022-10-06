@@ -12,7 +12,39 @@ datasource db {
 
 model User {
   id    Int     @id @default(autoincrement())
-  email String  @unique
+  email String  @unique 
   name  String  @unique
+  novel Novel[] 
+  post Post[]
   password String @db.VarChar(200)
+
+  @@map(name: "users")
+}
+
+model Novel {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(200)
+  cycle String
+  content String
+  category String
+  author User   @relation(fields: [authorId], references: [id])
+  authorId Int  @unique
+  post Post[]
+  createdAt DateTime
+
+  @@map(name: "novels")
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String @db.Text
+  author User @relation(fields: [authorId], references: [id])
+  authorId Int @unique
+  novel Novel @relation(fields: [novelId], references:[id])
+  novelId Int @unique
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map(name: "posts")
 }
