@@ -16,6 +16,8 @@ model User {
   name  String  @unique
   novel Novel[] 
   post Post[]
+  seed Int @default(0)
+  history History[]
   password String @db.VarChar(200)
 
   @@map(name: "users")
@@ -28,7 +30,7 @@ model Novel {
   content String
   category String
   author User   @relation(fields: [authorId], references: [id])
-  authorId Int  @unique
+  authorId Int  
   post Post[]
   createdAt DateTime
 
@@ -40,11 +42,23 @@ model Post {
   title String
   content String @db.Text
   author User @relation(fields: [authorId], references: [id])
-  authorId Int @unique
+  authorId Int
   novel Novel @relation(fields: [novelId], references:[id])
-  novelId Int @unique
+  novelId Int
+  history History[] 
   createdAt DateTime
   updatedAt DateTime
 
   @@map(name: "posts")
+}
+
+model History{
+  id Int @id @default(autoincrement())
+  buyer User @relation(fields: [buyerId], references: [id])
+  buyerId Int 
+  post Post @relation(fields: [postId], references: [id])
+  postId Int 
+  createdAt DateTime
+
+  @@map(name: "histories")
 }
