@@ -6,5 +6,5 @@ Router.get("/", function (req, res) {
   res.render("novels/new");
 });
 
-Router.post("/", NovelServices.Create);
+Router.post("/", NovelServices.CreateNovel);
 export default Router;

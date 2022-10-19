@@ -1,11 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaClientUnknownRequestError } from "@prisma/client/runtime";
-import { dbNow } from "../utils/dayUtils";
+
 const prisma = new PrismaClient();
 
 export const findById = async (id) => {
   try {
-    return await prisma.novel.findUnique({
+    return await prisma.post.findUnique({
       where: {
         id: id,
       },
@@ -15,9 +14,9 @@ export const findById = async (id) => {
   }
 };
 
-export const createNovel = async (data) => {
+export const createPost = async (data) => {
   try {
-    return await prisma.novel.create({
+    return await prisma.post.create({
       data,
     });
   } catch (err) {
@@ -25,9 +24,9 @@ export const createNovel = async (data) => {
   }
 };
 
-export const updateNovel = async (data) => {
+export const updatePost = async (data) => {
   try {
-    return await prisma.novel.update({
+    return await prisma.post.update({
       where: { id: data.id },
       data,
     });
@@ -36,9 +35,9 @@ export const updateNovel = async (data) => {
   }
 };
 
-export const deleteNovel = async (id) => {
+export const deletePost = async (id) => {
   try {
-    return await prisma.novel.delete({
+    return await prisma.post.delete({
       where: { id },
     });
   } catch (err) {
