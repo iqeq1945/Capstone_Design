@@ -1,78 +1,61 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <%- include('../partials/head') %>
-  </head>
-  <body>
-    <%- include('../partials/nav') %>
-
-    <div class="container mb-3">
-      <h3 class="contentBoxTop mb-3">New User</h3>
-
-      <form action="/user" method="post">
-        <div class="form-group row">
-          <label for="email" class="col-sm-3 col-form-label">Email*</label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              id="email"
-              name="email"
-              value=""
-              class="form-control"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="name" class="col-sm-3 col-form-label">Name*</label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value=""
-              class="form-control"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="password" class="col-sm-3 col-form-label"
-            >Password*</label
-          >
-          <div class="col-sm-9">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value=""
-              class="form-control"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="passwordConfirmation" class="col-sm-3 col-form-label"
-            >Password Confirmation*</label
-          >
-          <div class="col-sm-9 col-sm-offset-3">
-            <input
-              type="password"
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              value=""
-              class="form-control"
-            />
-          </div>
-        </div>
-        <p>
-          <small>*Required</small>
-        </p>
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-      <% if(locals.errors) { %>
-      <p><%= errors %></p>
-      <% } %>
+<head>
+  <%- include('../partials/user') %>
+</head>
+<h2>JandyNovel</h2>
+<div class="container right-panel-active" id="container">
+  <div class="form-container sign-up-container">
+    <form action="/login" method="post">
+      <h1>계정 생성</h1>
+      <input type="email" id="email" name="email" placeholder="이메일" />
+      <input type="text" id="name" name="name" placeholder="닉네임" />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="비밀번호"
+      />
+      <input
+        type="password"
+        id="passwordConfirmation"
+        name="passwordConfirmation"
+        placeholder="비밀번호 확인"
+      />
+      <button>회원 가입</button>
+    </form>
+  </div>
+  <div class="form-container sign-in-container">
+    <form action="/users" method="post">
+      <h1>로그인</h1>
+      <input type="email" placeholder="이메일" />
+      <input type="password" placeholder="비밀번호" />
+      <button type="submit">로그인</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="overlay-panel overlay-left">
+        <h1>어서오세요!</h1>
+        <p>당신의 소설 서재를 둘러보세요!</p>
+        <button class="ghost" id="signIn">로그인</button>
+      </div>
+      <div class="overlay-panel overlay-right">
+        <h1>안녕하세요:)</h1>
+        <p>당신의 소설을 찾아보세요!</p>
+        <button class="ghost" id="signUp">회원 가입</button>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>
+<script>
+  const signUpButton = document.getElementById("signUp");
+  const signInButton = document.getElementById("signIn");
+  const container = document.getElementById("container");
+
+  signUpButton.addEventListener("click", () => {
+    container.classList.add("right-panel-active");
+  });
+
+  signInButton.addEventListener("click", () => {
+    container.classList.remove("right-panel-active");
+  });
+</script>
