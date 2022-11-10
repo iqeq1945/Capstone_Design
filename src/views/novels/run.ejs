@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <%- include('../partials/head') %> <%- include('../partials/editor') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container my-5">
+      <h4 class="my-5">연재</h4>
+      <div id="editor" class="h-50"></div>
+    </div>
+  </body>
+</html>
+
+<!-- Initialize Quill editor -->
+<script>
+  var toolbarOptions = [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote"],
+
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["link", "image"],
+    ["clean"], // remove formatting button
+    ["custom"], // custom my Button
+  ];
+
+  var quill = new Quill("#editor", {
+    modules: {
+      toolbar: toolbarOptions,
+    },
+    theme: "snow",
+  });
+
+  var customButton = document.querySelector(".ql-custom");
+  customButton.innerHTML = `<bold>Custom</bold>`;
+  customButton.addEventListener("click", function () {
+    quill.insertText(0, "Hello", "bold", true);
+
+    quill.insertText(5, "Quill", {
+      color: "red",
+      italic: true,
+    });
+  });
+</script>
