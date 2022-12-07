@@ -4,7 +4,7 @@
 <h2>JandyNovel</h2>
 <div class="container right-panel-active" id="container">
   <div class="form-container sign-up-container">
-    <form action="/login" method="post">
+    <form action="/users" method="post">
       <h1>계정 생성</h1>
       <input type="email" id="email" name="email" placeholder="이메일" />
       <input type="text" id="name" name="name" placeholder="닉네임" />
@@ -24,10 +24,15 @@
     </form>
   </div>
   <div class="form-container sign-in-container">
-    <form action="/users" method="post">
+    <form action="/login" method="post">
       <h1>로그인</h1>
-      <input type="email" placeholder="이메일" />
-      <input type="password" placeholder="비밀번호" />
+      <input type="email" id="email" name="email" placeholder="이메일" />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="비밀번호"
+      />
       <button type="submit">로그인</button>
     </form>
   </div>

@@ -57,6 +57,7 @@ export const SingUp = async (req, res, next) => {
       })(req, res, next);
     } else {
       res.data = resFormat.fail(500, "회원가입 실패");
+      res.redirect("/users/signup");
       return;
     }
   } catch (err) {
