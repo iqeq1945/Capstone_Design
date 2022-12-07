@@ -32,8 +32,9 @@ model Novel {
   author User   @relation(fields: [authorId], references: [id])
   authorId Int  
   post Post[]
+  image String
   createdAt DateTime
-
+  updatedAt DateTime
   @@map(name: "novels")
 }
 

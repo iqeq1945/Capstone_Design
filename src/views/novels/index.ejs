@@ -7,6 +7,131 @@
   </head>
   <body>
     <%- include('../partials/nav') %>
-    <p><%= data %></p>
+    <div class="wrap mx-auto mt-5" style="width: 800px">
+      <div class="d-flex px-5 py-3 border border-dark">
+        <div class="d-flex flex-column">
+          <img
+            src="/img/jandy_logo.png"
+            width="200px;"
+            height="280px;"
+            alt="book_cover"
+          />
+          <button type="button" class="btn btn-success">좋아요!</button>
+        </div>
+        <div class="d-flex flex-column pt-5 ms-5">
+          <h2>제목</h2>
+          <span>별점</span>
+          <div class="d-flex flex-column my-3">
+            <span>작가</span>
+            <span>총 몇화 | 미완결</span>
+          </div>
+          <div class="d-flex flex-column my-3">
+            <span>작품소개</span>
+            <p>라라라ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+          </div>
+        </div>
+      </div>
+      <div class="row my-5 border-top">
+        <div class="col-12 my-3">
+          <div class="d-flex mb-3">
+            <h4>연재 목록</h4>
+            <button class="btn btn-dark ms-auto">구매하기</button>
+          </div>
+
+          <ul class="list-group">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check1"
+                  ><input type="checkbox" id="check1" />
+                  <span> 1화 </span>
+                </label>
+              </div>
+
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check2"
+                  ><input type="checkbox" id="check2" />
+                  <span> 2화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check3"
+                  ><input type="checkbox" id="check3" />
+                  <span> 3화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check4"
+                  ><input type="checkbox" id="check4" />
+                  <span> 4화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check1"
+                  ><input type="checkbox" id="check1" />
+                  <span> 1화 </span>
+                </label>
+              </div>
+
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check2"
+                  ><input type="checkbox" id="check2" />
+                  <span> 2화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check3"
+                  ><input type="checkbox" id="check3" />
+                  <span> 3화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <div class="d-flex">
+                <label for="check4"
+                  ><input type="checkbox" id="check4" />
+                  <span> 4화 </span>
+                </label>
+              </div>
+              <button class="btn btn-primary">New</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

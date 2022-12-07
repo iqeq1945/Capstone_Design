@@ -46,10 +46,11 @@
           </div>
         </div>
         <div class="col-8 ms-5 flex-fill">
-          <div class="d-flex m-3 border">
-            <div class="d-flex flex-column border p-2">
-              <h4>닉네임</h4>
-              <small>이메일</small>
+          <div class="d-flex m-3 my-auto border">
+            <div class="d-flex flex-column align-self-center border p-2">
+              <img src="/img/user.png" alt="user" />
+              <h4><%= currentUser.name %></h4>
+              <small><%= currentUser.email %></small>
             </div>
             <ul class="nav flex-row flex-fill border">
               <li class="flex-fill border">
