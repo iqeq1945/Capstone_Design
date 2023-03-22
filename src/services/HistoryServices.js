@@ -22,9 +22,11 @@ export const Get = async (req, res, next) => {
     const response = await HistoryRepository.getMyHistory(req.body);
     console.log(response);
     if (response) {
-      return res.send(response);
+      req.body.history = response;
+      next();
     } else {
-      return res.send("실패");
+      req.body.history = none;
+      next();
     }
   } catch (err) {
     console.error(err);

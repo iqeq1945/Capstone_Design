@@ -6,7 +6,6 @@ export const storage = multer.diskStorage({
     cb(null, __dirname + "/../public/upload");
   },
   filename(req, file, cb) {
-    console.log(req.body);
     let mimeType;
     switch (file.mimetype) {
       case "image/jpeg":
@@ -25,7 +24,7 @@ export const storage = multer.diskStorage({
         mimeType = "jpg";
         break;
     }
-    cb(null, `${file.originalname}.${mimeType}`);
+    cb(null, `${req.user.id}${req.body.title}.${mimeType}`);
   },
 });
 

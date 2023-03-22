@@ -3,6 +3,26 @@
     <div class="navbar-brand">JandyNovel</div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
+        <form
+          class="d-flex form-inline me-5"
+          method="post"
+          action="/novels/category"
+        >
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            name="keyword"
+            placeholder="검색해보기"
+            aria-label="Search"
+          />
+          <button
+            class="btn btn-outline-success my-2 my-sm-0"
+            style="white-space: nowrap"
+            type="submit"
+          >
+            검색
+          </button>
+        </form>
         <% if(isAuthenticated){ %>
         <li class="nav-item">
           <a href="/users/myjandy" class="nav-link">마이페이지</a>

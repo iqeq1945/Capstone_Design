@@ -16,4 +16,7 @@ Router.get("/myjandy", function (req, res) {
   res.render("user/myjandy");
 });
 
+Router.get("/history", function (req, res) {
+  res.render("user/history");
+});
 export default Router;
