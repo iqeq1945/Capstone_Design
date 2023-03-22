@@ -10,28 +10,32 @@
     <div class="container my-5">
       <ul class="nav">
         <li class="nav-item border border-success rounded-start">
-          <a class="nav-link active" href="#">전체</a>
+          <a class="nav-link active" href="/novels/category/전체">전체</a>
         </li>
         <li class="nav-item border border-success">
-          <a class="nav-link" href="#">판타지</a>
+          <a class="nav-link" href="/novels/category/판타지">판타지</a>
         </li>
         <li class="nav-item border border-success">
-          <a class="nav-link" href="#">로맨스</a>
+          <a class="nav-link" href="/novels/category/로맨스">로맨스</a>
         </li>
         <li class="nav-item border border-success rounded-end">
-          <a class="nav-link" href="#">무협</a>
+          <a class="nav-link" href="/novels/category/무협">무협</a>
         </li>
       </ul>
       <div class="d-flex my-5 flex-column">
         <h4 class="border-bottom"style="width: 5%">전체</h4>
-        <div class="d-flex flex-wrap justify-content-between my-2">
+        <div class="d-flex flex-wrap my-2">
+          <% data.forEach(function(el, index) { %>
           <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
+            <a style="text-decoration: none;" href="/novels/<%= el.id %>">
+            <img class="card-img-top" src='/upload/<%= el.image %>'  alt="Card image cap">
             <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
+              <h5 class="card-title"><%= el.title %></h5>
+              <p class="card-text"><%= el.author.name %></p>
             </div>
+          </a>
           </div>
+          <% }); %>
           <div class="card m-1" style="width: 23%;">
             <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
             <div class="card-body border-top">

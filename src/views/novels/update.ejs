@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="container mb-3 mt-5">
-      <h3>새 작품 등록</h3>
+      <h3>작품 정보 수정</h3>
       <form action="/novels" method="post" enctype="multipart/form-data">
         <div class="form-group my-1">
           연재 주기
@@ -40,7 +40,7 @@
             type="text"
             id="title"
             name="title"
-            value=""
+            value=<%= data.title %>
             class="form-control"
           />
         </div>
@@ -52,21 +52,15 @@
             name="content"
             rows="5"
             class="form-control"
-          ></textarea>
-        </div>
-        <div class="form-group my-3">
-          <input
-            type="file"
-            id="upload"
-            name="upload"
-            onchange="readURL(this);"
-          />
+          >=<%= data.content %></textarea>
         </div>
         <img class="form-group my-1" id="preview"></img>
         <div>
-          <a class="btn btn-primary" href="/users">Back</a>
-          <button type="submit" class="btn btn-primary">등록하기</button>
+          <a class="btn btn-primary" href="/users">취소</a>
+          <button type="submit" class="btn btn-primary">수정하기</button>
         </div>
+        
+        <input type="hidden" id="novelId" name="novelId" value=<%= data.id %>>
       </form>
     </div>
     <div class="errors">
@@ -75,17 +69,4 @@
       <% } %>
     </div>
   </body>
-  <script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          document.getElementById("preview").src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-      } else {
-        document.getElementById("preview").src = "";
-      }
-    }
-  </script>
 </html>

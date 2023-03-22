@@ -1,0 +1,53 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container">
+      <div class="d-flex justify-content-center py-5">
+        <%- include('../partials/mynav') %>
+          <div class="d-flex row ms-5 mt-5">
+            <h5>> 결제내역 </h5>
+            <div class="row justify-content-around m-auto my-3">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">구매일</th>
+                        <th scope="col">결제내역</th>
+                        <th scope="col">주문금액</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

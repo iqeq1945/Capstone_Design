@@ -25,10 +25,10 @@ export const createNovel = async (data) => {
   }
 };
 
-export const updateNovel = async (data) => {
+export const updateNovel = async (data, novelId) => {
   try {
     return await prisma.novel.update({
-      where: { id: data.id },
+      where: { id: novelId },
       data,
     });
   } catch (err) {
@@ -40,6 +40,55 @@ export const deleteNovel = async (id) => {
   try {
     return await prisma.novel.delete({
       where: { id },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const findByKeyword = async (keyword) => {
+  try {
+    return await prisma.novel.findMany({
+      where: {
+        OR: [
+          {
+            title: {
+              contains: keyword,
+            },
+          },
+          {
+            author: {
+              name: {
+                contains: keyword,
+              },
+            },
+          },
+        ],
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const findList = async (category) => {
+  try {
+    return await prisma.novel.findMany({
+      where: { category },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   } catch (err) {
     console.error(err);
