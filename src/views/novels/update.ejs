@@ -8,7 +8,7 @@
   <body>
     <div class="container mb-3 mt-5">
       <h3>작품 정보 수정</h3>
-      <form action="/novels" method="post" enctype="multipart/form-data">
+      <form action="/novels/update/<%= data.id %>?_method=PUT" method="post" enctype="multipart/form-data">
         <div class="form-group my-1">
           연재 주기
           <label><input type="checkbox" name="cycle" value="월" /> 월</label>
@@ -52,15 +52,25 @@
             name="content"
             rows="5"
             class="form-control"
-          >=<%= data.content %></textarea>
+          ><%= data.content %></textarea>
         </div>
-        <img class="form-group my-1" id="preview"></img>
+        <div class="form-group my-3">
+          <input
+            type="file"
+            id="upload"
+            name="upload"
+            onchange="readURL(this);"
+            src = "<%= data.image %>"
+            value = "<%= data.image %>"
+          />
+        </div>
+        <img class="form-group my-1" id="preview" src="/upload/<%= data.image %>"></img>
         <div>
           <a class="btn btn-primary" href="/users">취소</a>
           <button type="submit" class="btn btn-primary">수정하기</button>
         </div>
         
-        <input type="hidden" id="novelId" name="novelId" value=<%= data.id %>>
+        <input type="hidden" id="novelId" name="novelId" value=<%= data.novelId %>>
       </form>
     </div>
     <div class="errors">
@@ -69,4 +79,17 @@
       <% } %>
     </div>
   </body>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById("preview").src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        document.getElementById("preview").src = "";
+      }
+    }
+  </script>
 </html>

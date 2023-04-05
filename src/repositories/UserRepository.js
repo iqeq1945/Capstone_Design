@@ -59,6 +59,22 @@ export const findByIdWithData = async (id) => {
         id: true,
         name: true,
         email: true,
+        seed: true,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const createSeed = async (id, seed) => {
+  try {
+    return await prisma.user.update({
+      where: { id },
+      data: {
+        seed: {
+          increment: seed,
+        },
       },
     });
   } catch (err) {

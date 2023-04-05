@@ -103,4 +103,19 @@ export const LogOut = (req, res, next) => {
   });
 };
 
-export const GetUser = (req, res, next) => {};
+export const CreateSeed = async (req, res, next) => {
+  try {
+    const response = await UserRepository.createSeed(
+      req.user.id,
+      parseInt(req.body.seed, 10) / 100
+    );
+    if (response) {
+      next();
+    } else {
+      return res.redirect("/users/cash");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};

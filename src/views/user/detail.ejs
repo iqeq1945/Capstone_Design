@@ -1,0 +1,45 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container">
+      <div class="d-flex py-5">
+        <%- include('../partials/mynav') %>
+          <div class="d-flex row flex-fill ms-5 mt-5">
+            <h5>> 결제내역 </h5>
+            <div class="row  my-3">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">구매일</th>
+                        <th scope="col">결제내역</th>
+                        <th scope="col">주문금액</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% data.forEach(function(cash, index) { %>
+                        <% var date = (cash.createdAt).toLocaleString(); %>
+                        <tr scope="row">
+                          <th><%= index+1 %></th>
+                          <td><%= date %></td>
+                          <td>씨앗 <%= cash.seed %>개</td>
+                          <td><%= cash.seed*100 %> 원</td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                  </table>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
