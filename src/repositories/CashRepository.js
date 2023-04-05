@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export const findById = async (id) => {
   try {
-    return await prisma.novel.findUnique({
+    return await prisma.cash.findUnique({
       where: {
         id: id,
       },
@@ -15,9 +15,9 @@ export const findById = async (id) => {
   }
 };
 
-export const createHistory = async (data) => {
+export const createCash = async (data) => {
   try {
-    return await prisma.history.create({
+    return await prisma.cash.create({
       data,
     });
   } catch (err) {
@@ -25,9 +25,9 @@ export const createHistory = async (data) => {
   }
 };
 
-export const deleteHistory = async (id) => {
+export const deleteCash = async (id) => {
   try {
-    return await prisma.History.delete({
+    return await prisma.cash.delete({
       where: { id },
     });
   } catch (err) {
@@ -35,9 +35,9 @@ export const deleteHistory = async (id) => {
   }
 };
 
-export const getMyHistory = async (id) => {
+export const getMyCash = async (id) => {
   try {
-    return await prisma.history.findMany({
+    return await prisma.cash.findMany({
       where: { buyerId: id },
     });
   } catch (err) {

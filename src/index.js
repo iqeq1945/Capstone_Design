@@ -11,7 +11,7 @@ import flash from "connect-flash";
 import HomeController from "./controllers/home";
 import UserController from "./controllers/user";
 import NovelController from "./controllers/novel";
-
+import PostController from "./controllers/post";
 const app = express();
 
 dotenv.config();
@@ -48,6 +48,7 @@ app.use(function (req, res, next) {
 app.use("/", HomeController);
 app.use("/users", UserController);
 app.use("/novels", NovelController);
+app.use("/posts", PostController);
 // Port setting
 const port = 3000;
 app.listen(port, function () {

@@ -94,3 +94,13 @@ export const findList = async (category) => {
     console.error(err);
   }
 };
+
+export const findByauthor = async (authorId) => {
+  try {
+    return await prisma.novel.findMany({
+      where: { authorId },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

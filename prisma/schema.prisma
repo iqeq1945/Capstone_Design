@@ -16,7 +16,7 @@ model User {
   history  History[]
   novel    Novel[]
   post     Post[]
-
+  cash     Cash[]
   @@map("users")
 }
 
@@ -65,4 +65,14 @@ model History {
   @@index([buyerId], map: "histories_buyerId_fkey")
   @@index([postId], map: "histories_postId_fkey")
   @@map("histories")
+}
+
+model Cash {
+  id        Int      @id @default(autoincrement())
+  buyerId   Int
+  buyer     User     @relation(fields: [buyerId], references: [id])
+  seed      Int
+  createdAt DateTime
+
+  @@map("cashes")
 }

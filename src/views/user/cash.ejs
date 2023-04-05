@@ -1,0 +1,111 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container">
+      <div class="d-flex py-5">
+        <%- include('../partials/mynav') %>
+        <div class="d-flex flex-column flex-fill mx-5">
+          <h2>씨앗 구매</h2>
+
+          <div class="card my-3">
+            <div class="card-header">
+              <%= currentUser.name %>님의 보유 중인 씨앗!
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p><%= currentUser.seed %>개 입니다!</p>
+              </blockquote>
+            </div>
+          </div>
+          <div class="d-flex flex-row flex-fill">
+            <form
+              id="seed"
+              class="d-flex flew-row flex-fill"
+              action="/users/cash"
+              method="post"
+            >
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">씨앗 심기</th>
+                    <th scope="col">가격</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" id="_1" name="seed" value="100" />
+                    </th>
+
+                    <td>씨앗 1개</td>
+                    <td>100 원</td>
+                  </tr>
+
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" id="_5" name="seed" value="1000" />
+                    </th>
+
+                    <td>씨앗 10개</td>
+                    <td>1000 원</td>
+                  </tr>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" name="seed" value="5000" />
+                    </th>
+                    <td>씨앗 50개</td>
+                    <td>5000 원</td>
+                  </tr>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" name="seed" value="10000" />
+                    </th>
+                    <td>씨앗 100개</td>
+                    <td>10000 원</td>
+                  </tr>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" name="seed" value="30000" />
+                    </th>
+                    <td>씨앗 300개</td>
+                    <td>30000 원</td>
+                  </tr>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" name="seed" value="50000" />
+                    </th>
+                    <td>씨앗 500개</td>
+                    <td>50000 원</td>
+                  </tr>
+                  <tr class="radio_tr">
+                    <th scope="row">
+                      <input type="radio" name="seed" value="100000" />
+                    </th>
+                    <td>씨앗 1000개</td>
+                    <td>100000 원</td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+          <button class="btn btn-primary" type="submit" form="seed">
+            씨앗 구매
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(".radio_tr").click(function () {
+      var radio = $(this).find("th:first-child :radio");
+      radio.attr("checked", !radio.is(":checked"));
+    });
+  </script>
+</html>

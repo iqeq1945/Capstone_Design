@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
   <div class="container">
-    <div class="navbar-brand">JandyNovel</div>
+    <div
+      class="navbar-brand"
+      onclick="location.href='/'"
+      style="cursor: pointer"
+    >
+      JandyNovel
+    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <form
@@ -23,6 +29,9 @@
             검색
           </button>
         </form>
+        <li class="nav-item">
+          <a href="/novels/category" class="nav-link">카테고리</a>
+        </li>
         <% if(isAuthenticated){ %>
         <li class="nav-item">
           <a href="/users/myjandy" class="nav-link">마이페이지</a>

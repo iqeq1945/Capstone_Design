@@ -69,14 +69,20 @@ export const UpdateNovel = async (req, res, next) => {
 
 export const DeleteNovel = async (req, res, next) => {
   try {
-    if (req.user.id != req.body.authorId) {
-      return res.send("작가의 정보가 옳지 않음");
-    }
-    const response = await NovelRepository.deleteNovel(req.body.id);
-    if (response) {
-      return res.send("삭제 성공");
+    const check = await NovelRepository.findById(
+      parseInt(req.params.novelId, 10)
+    );
+    if (check && req.user.id == check.authorId) {
+      const response = await NovelRepository.deleteNovel(
+        parseInt(req.params.novelId, 10)
+      );
+      if (response) {
+        return res.render("/user/work");
+      } else {
+        return res.send("삭제 실패");
+      }
     } else {
-      return res.redirect("삭제 실패");
+      return res.send("query정보 오류");
     }
   } catch (err) {
     console.error(err);
@@ -114,6 +120,37 @@ export const GetList = async (req, res, next) => {
     next();
   }
 };
+
+export const GetMyList = async (req, res, next) => {
+  try {
+    const response = await NovelRepository.findByauthor(req.user.id);
+    if (response) {
+      res.render("user/work", { user: req.user, data: response });
+    } else {
+      return res.redirect("/");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};
+
+export const GetInfo = async (req, res, next) => {
+  try {
+    const response = await NovelRepository.findById(
+      parseInt(req.params.id, 10)
+    );
+    if (response) {
+      res.render("novels/update", { data: response });
+    } else {
+      return res.redirect("/users/work");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};
+
 const createOption = (bodydata, file, authorId) => {
   // DB data 옵션 설정.
   const dataOption = {
