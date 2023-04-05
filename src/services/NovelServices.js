@@ -25,7 +25,7 @@ export const CreateNovel = async (req, res, next) => {
     const data = createOption(req.body, req.file, req.user.id);
     const response = await NovelRepository.createNovel(data);
     if (response) {
-      return res.render("novels/index", { data });
+      return res.redirect("/users/work");
     } else {
       return res.redirect("/novels");
     }
@@ -158,7 +158,7 @@ const createOption = (bodydata, file, authorId) => {
     content: bodydata.content,
     category: bodydata.category,
     cycle: bodydata.cycle.toString(),
-    image: file.filename,
+    image: file.location,
     author: {
       connect: { id: authorId },
     },
@@ -177,6 +177,7 @@ const updateOption = (bodydata) => {
     category: bodydata.category,
     cycle: bodydata.cycle.toString(),
     updatedAt: dbNow(),
+
   };
 
   return dataOption;

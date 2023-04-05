@@ -8,7 +8,7 @@ export const Create = async (req, res, next) => {
     const response = await CashRepository.createCash(
       createOption(req.user.id, parseInt(req.body.seed, 10))
     );
-
+	  console.log(response, "hihi");
     if (response) {
       res.redirect("/users/cash");
     } else {
