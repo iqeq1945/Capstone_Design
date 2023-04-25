@@ -1,6 +1,7 @@
 import express from "express";
 import * as ImageServices from "../services/ImageServices";
 import { upload } from "../config/s3";
+
 const Router = express.Router();
 
 Router.get("/", function (req, res) {
@@ -15,7 +16,8 @@ Router.post("/new", upload.single("upload"), function (req, res) {
   res.send(req.body, res.data);
 });
 
-Router.post("/upload", function (req, res) {
-  console.log(req.body);
+Router.post("/upload", upload.single("file"), function (req, res) {
+  console.log(req.file);
+  let url = req.file.location;
+  res.json(url);
 });
-export default Router;

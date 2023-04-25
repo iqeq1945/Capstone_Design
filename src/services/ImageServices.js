@@ -39,6 +39,7 @@ export const postStorage = multer.diskStorage({
     cb(null, __dirname + "/../public/upload");
   },
   filename(req, file, cb) {
+    console.log(file);
     let mimeType;
     switch (file.mimetype) {
       case "image/jpeg":
