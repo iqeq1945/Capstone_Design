@@ -41,7 +41,7 @@ model Novel {
 model Post {
   id        Int       @id @default(autoincrement())
   title     String
-  content   String    @db.Text
+  content   Json   @db.Json
   authorId  Int
   novelId   Int
   createdAt DateTime
