@@ -4,8 +4,8 @@ import { upload } from "../config/s3";
 import * as ImageServices from "../services/ImageServices";
 const Router = express.Router();
 
-Router.get("/:id", function (req, res) {
-  res.render("novels/index");
+Router.get("/:id", NovelServices.GetInfo, function (req, res, next) {
+  res.render("novels/index", { novel: req.novel });
 });
 
 Router.get("/", function (req, res) {
@@ -19,7 +19,9 @@ Router.put(
   ImageServices.upload.single("upload"),
   NovelServices.UpdateNovel
 );
-Router.get("/update/:id", NovelServices.GetInfo);
+Router.get("/update/:id", NovelServices.GetInfo, function (req, res, next) {
+  res.render("novels/update", { data: req.novel });
+});
 
 Router.get("/category", NovelServices.GetList);
 Router.get("/category/:category", NovelServices.GetList);

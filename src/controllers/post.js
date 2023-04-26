@@ -21,3 +21,5 @@ Router.post("/upload", upload.single("file"), function (req, res) {
   let url = req.file.location;
   res.json(url);
 });
+
+export default Router;
