@@ -9,6 +9,9 @@ export const findById = async (id) => {
       where: {
         id: id,
       },
+      include: {
+        post: true,
+      },
     });
   } catch (err) {
     console.error(err);

@@ -11,14 +11,15 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/editorjs-text-color-plugin@2.0.2/dist/bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@sotaproject/strikethrough"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"></script>
 <div class="d-flex justify-content-end">
   <button id="save-button">Save</button>
 </div>
 <div id="editorjs"></div>
 
 <pre id="output"></pre>
-
+<pre id="viewer"></pre>
 <script>
   const editor = new EditorJS({
     /**
@@ -40,7 +41,23 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
         class: List,
         inlineToolbar: true,
       },
-      image: SimpleImage,
+      image: {
+        class: ImageTool,
+        config: {
+          uploader: {
+            uploadByFile(file) {
+              return uploadImage(file).then((resultUrl) => {
+                return {
+                  success: 1,
+                  file: {
+                    url: resultUrl,
+                  },
+                };
+              });
+            },
+          },
+        },
+      },
       quote: Quote,
       paragraph: {
         class: Paragraph,
@@ -78,10 +95,34 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
 
   const saveButton = document.getElementById("save-button");
   const output = document.getElementById("output");
-
+  const viewer = document.getElementById("viewer");
+  const edjsParser = edjsHTML();
+  let html;
   saveButton.addEventListener("click", () => {
     editor.save().then((savedData) => {
       output.innerHTML = JSON.stringify(savedData, null, 4);
+      html = edjsParser.parse(savedData);
     });
   });
+
+  function uploadImage(file) {
+    let form_data = new FormData();
+    form_data.append("file", file);
+    console.log(file);
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        data: form_data,
+        type: "POST",
+        url: "/posts/upload",
+        cache: false,
+        contentType: false,
+        enctype: "multipart/form-data",
+        processData: false,
+        success: function (url) {
+          console.log(url);
+          resolve(url);
+        },
+      });
+    });
+  }
 </script>

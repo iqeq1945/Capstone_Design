@@ -140,11 +140,9 @@ export const GetInfo = async (req, res, next) => {
     const response = await NovelRepository.findById(
       parseInt(req.params.id, 10)
     );
-    if (response) {
-      res.render("novels/update", { data: response });
-    } else {
-      return res.redirect("/users/work");
-    }
+
+    req.novel = response;
+    next();
   } catch (err) {
     console.error(err);
     next();
@@ -177,7 +175,6 @@ const updateOption = (bodydata) => {
     category: bodydata.category,
     cycle: bodydata.cycle.toString(),
     updatedAt: dbNow(),
-
   };
 
   return dataOption;

@@ -11,7 +11,7 @@
       <div class="d-flex px-5 py-3 border border-dark">
         <div class="d-flex flex-column">
           <img
-            src="/img/jandy_logo.png"
+            src="<%= novel.image %>"
             width="200px;"
             height="280px;"
             alt="book_cover"
@@ -19,15 +19,15 @@
           <button type="button" class="btn btn-success">좋아요!</button>
         </div>
         <div class="d-flex flex-column pt-5 ms-5">
-          <h2>제목</h2>
-          <span>별점</span>
+          <h2><%= novel.title %></h2>
+
           <div class="d-flex flex-column my-3">
-            <span>작가</span>
-            <span>총 몇화 | 미완결</span>
+            <span><%= novel.author %></span>
+            <span>총 <%= novel.post.length %>화</span>
           </div>
           <div class="d-flex flex-column my-3">
-            <span>작품소개</span>
-            <p>라라라ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+            <p>작품소개</p>
+            <p><%= novel.content %></p>
           </div>
         </div>
       </div>

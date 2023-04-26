@@ -28,7 +28,7 @@
           <% data.forEach(function(el, index) { %>
           <div class="card m-1" style="width: 23%;">
             <a style="text-decoration: none;" href="/novels/<%= el.id %>">
-            <img class="card-img-top" src='/upload/<%= el.image %>'  alt="Card image cap">
+            <img class="card-img-top" src='<%= el.image %>'  alt="Card image cap">
             <div class="card-body border-top">
               <h5 class="card-title"><%= el.title %></h5>
               <p class="card-text"><%= el.author.name %></p>

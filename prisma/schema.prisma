@@ -17,6 +17,7 @@ model User {
   novel    Novel[]
   post     Post[]
   cash     Cash[]
+  like     Like[]
   @@map("users")
 }
 
@@ -32,7 +33,7 @@ model Novel {
   updatedAt DateTime
   author    User     @relation(fields: [authorId], references: [id])
   post      Post[]
-
+  like      Like[]
   @@index([authorId], map: "novels_authorId_fkey")
   @@map("novels")
 }
@@ -40,7 +41,7 @@ model Novel {
 model Post {
   id        Int       @id @default(autoincrement())
   title     String
-  content   String    @db.Text
+  content   Json   @db.Json
   authorId  Int
   novelId   Int
   createdAt DateTime
@@ -75,4 +76,15 @@ model Cash {
   createdAt DateTime
 
   @@map("cashes")
+}
+
+model Like {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  novelId Int
+  novel Novel @relation(fields: [novelId], references: [id])
+  createdAt DateTime
+
+  @@id([userId, novelId], name:"likeKey")
+  @@map("likes")
 }
