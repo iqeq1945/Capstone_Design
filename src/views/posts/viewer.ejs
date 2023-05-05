@@ -1,14 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
   <head>
     <%- include('../partials/head') %>
-    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"></script>
+    <link rel="stylesheet" href="/css/viewer.css" />
   </head>
   <body>
-    <%- include('../partials/nav') %>
-    <div class="container my-5">
-      <h4 class="my-5">연재</h4>
-      <%- include('../partials/editor') %>
+    <nav
+      class="viewer d-flex px-5 justify-content-around align-items-center fixed-top"
+    >
+      <div class="title">제목들어갈곳</div>
+      <div class="link">
+        <a href="#">이전화</a> |
+        <a href="#">다음화</a>
+      </div>
+    </nav>
+    <div class="d-flex justify-content-between py-3 align-items-center">
+      <div><%= post %></div>
     </div>
   </body>
 </html>

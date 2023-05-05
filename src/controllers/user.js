@@ -22,4 +22,12 @@ Router.get("/cash", function (req, res) {
 });
 
 Router.post("/cash", UserServices.CreateSeed, CashService.Create);
+
+Router.post("/like", UserServices.LikeOnNovel, function (req, res) {
+  res.json("좋아요 성공");
+});
+
+Router.post("/unlike", UserServices.unLikeOnNovel, function (req, res) {
+  res.json("좋아요 취소 성공");
+});
 export default Router;

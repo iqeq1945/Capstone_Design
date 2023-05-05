@@ -119,3 +119,37 @@ export const CreateSeed = async (req, res, next) => {
     next();
   }
 };
+
+export const LikeOnNovel = async (req, res, next) => {
+  try {
+    const response = await UserRepository.LikeOnNovel(
+      req.user.id,
+      parseInt(req.body.novelId, 10)
+    );
+    if (response) {
+      next();
+    } else {
+      res.send("좋아요 실패");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};
+
+export const unLikeOnNovel = async (req, res, next) => {
+  try {
+    const response = await UserRepository.unLikeOnNovel(
+      req.user.id,
+      parseInt(req.body.novelId, 10)
+    );
+    if (response) {
+      next();
+    } else {
+      res.send("좋아요 실패");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};

@@ -18,6 +18,8 @@ model User {
   post     Post[]
   cash     Cash[]
   like     Like[]
+  star     Star[]
+  comment  Comment[]
   @@map("users")
 }
 
@@ -40,7 +42,6 @@ model Novel {
 
 model Post {
   id        Int       @id @default(autoincrement())
-  title     String
   content   Json   @db.Json
   authorId  Int
   novelId   Int
@@ -49,7 +50,8 @@ model Post {
   author    User      @relation(fields: [authorId], references: [id])
   novel     Novel     @relation(fields: [novelId], references: [id])
   history   History[]
-
+  star      Star[]
+  comment   Comment[]
   @@index([authorId], map: "posts_authorId_fkey")
   @@index([novelId], map: "posts_novelId_fkey")
   @@map("posts")
@@ -87,4 +89,28 @@ model Like {
 
   @@id([userId, novelId], name:"likeKey")
   @@map("likes")
+}
+
+model Star {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  createdAt DateTime
+  star   Int
+  @@id([userId, postId], name:"starKey")
+  @@map("starts")
+}
+
+model Comment {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  createdAt DateTime
+  updatedAt DateTime
+  content String
+
+  @@id([userId, postId], name:"comment")
+  @@map("comments")
 }

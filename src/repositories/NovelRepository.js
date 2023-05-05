@@ -11,6 +11,7 @@ export const findById = async (id) => {
       },
       include: {
         post: true,
+        like: true,
       },
     });
   } catch (err) {

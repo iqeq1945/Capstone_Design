@@ -77,7 +77,7 @@ export const DeleteNovel = async (req, res, next) => {
         parseInt(req.params.novelId, 10)
       );
       if (response) {
-        return res.render("/user/work");
+        return res.render("user/work");
       } else {
         return res.send("삭제 실패");
       }

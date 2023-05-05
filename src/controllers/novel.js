@@ -5,6 +5,7 @@ import * as ImageServices from "../services/ImageServices";
 const Router = express.Router();
 
 Router.get("/:id", NovelServices.GetInfo, function (req, res, next) {
+  console.log(req.novel);
   res.render("novels/index", { novel: req.novel });
 });
 
@@ -14,14 +15,18 @@ Router.get("/", function (req, res) {
 
 Router.post("/", upload.single("upload"), NovelServices.CreateNovel);
 
+Router.get("/update/:id", NovelServices.GetInfo, function (req, res, next) {
+  res.render("novels/update", { data: req.novel });
+});
+
+Router.put("/update/:id", function (req, res) {
+  res.send(req.body);
+});
 Router.put(
   "/",
   ImageServices.upload.single("upload"),
   NovelServices.UpdateNovel
 );
-Router.get("/update/:id", NovelServices.GetInfo, function (req, res, next) {
-  res.render("novels/update", { data: req.novel });
-});
 
 Router.get("/category", NovelServices.GetList);
 Router.get("/category/:category", NovelServices.GetList);

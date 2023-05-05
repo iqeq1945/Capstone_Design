@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime";
-
+import { dbNow } from "../utils/dayUtils";
 const prisma = new PrismaClient();
 
 export const findByEmail = async (email) => {
@@ -90,14 +90,16 @@ export const LikeOnNovel = async (userId, novelId) => {
       },
       data: {
         like: {
-          create: {
-            novel: {
-              connect: {
-                id: novelId,
+          create: [
+            {
+              novel: {
+                connect: {
+                  id: novelId,
+                },
               },
+              createdAt: dbNow(),
             },
-            createdAt: dbNow(),
-          },
+          ],
         },
       },
     });

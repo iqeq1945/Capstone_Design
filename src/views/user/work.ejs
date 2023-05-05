@@ -15,9 +15,10 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">작품 이름</th>
-            <th scope="col">연재 주기</th>
             <th scope="col">작품 사진</th>
-            <th scope="col">수정 및 삭제</th>
+            <th scope="col">작품 수정</th>
+            <th scope="col">작품 삭제</th>
+            <th scope="col">작품 연재</th>
           </tr>
         </thead>
         <tbody>
@@ -25,17 +26,39 @@
           <tr scope="row">
             <th><%= index+1 %></th>
             <td><%= novel.title %></td>
-            <td><%= novel.cycle %></td>
-            <td class="img_popup"><%= novel.image %></td>
+            <td class="img_popup">
+              <img
+                src="<%= novel.image %>"
+                width="30%"
+                height="30%"
+                alt=""
+                target="_blank"
+              />
+            </td>
             <td>
-              <button class="btn btn-success">수정</button
-              ><button
+              <button
+                class="btn btn-success"
+                onclick="location.href='/novels/update/<%= novel.id %>'"
+              >
+                수정
+              </button>
+            </td>
+            <td>
+              <button
                 class="btn btn-dark delete"
                 data-bs-toggle="modal"
                 data-bs-target="#staticModal"
                 data-id="<%= novel.id %>"
               >
                 삭제
+              </button>
+            </td>
+            <td>
+              <button
+                class="btn btn-success"
+                onclick="location.href='/posts/new/<%= novel.id %>'"
+              >
+                연재
               </button>
             </td>
             <%})%>
