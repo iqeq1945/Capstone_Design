@@ -98,6 +98,7 @@ p {
   top: 300px;
   left: 50%;
   padding-right: 20%;
+  display: none;
 }
 .chat_content {
   width: 350px;
