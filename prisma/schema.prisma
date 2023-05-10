@@ -34,6 +34,7 @@ model Novel {
   createdAt DateTime
   updatedAt DateTime
   author    User     @relation(fields: [authorId], references: [id])
+  history   History[]
   post      Post[]
   like      Like[]
   @@index([authorId], map: "novels_authorId_fkey")
@@ -42,6 +43,7 @@ model Novel {
 
 model Post {
   id        Int       @id @default(autoincrement())
+  title     String @db.VarChar(200)
   content   Json   @db.Json
   authorId  Int
   novelId   Int
@@ -60,9 +62,11 @@ model Post {
 model History {
   id        Int      @id @default(autoincrement())
   buyerId   Int
+  novelId   Int
   postId    Int
   createdAt DateTime
   buyer     User     @relation(fields: [buyerId], references: [id])
+  novel     Novel @relation(fields: [novelId], references: [id])
   post      Post     @relation(fields: [postId], references: [id])
 
   @@index([buyerId], map: "histories_buyerId_fkey")

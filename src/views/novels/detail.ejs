@@ -1,0 +1,121 @@
+<!-- views/users/show.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/work.css" />
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div
+      class="d-flex flex-column"
+      style="margin-left: 15%; margin-right: 15%; margin-top: 100px"
+    >
+      <h3 class="contentBoxTop mb-5" style="margin-left: 20%">
+        <span class="border-bottom border-dark">내 작품</span>
+      </h3>
+
+      <div
+        class="d-flex my-5 justify-content-center align-items-center bd py-5"
+      >
+        <img src="<%= novel.image %>" width="10%" alt="" target="_blank" />
+        <div class="d-flex flex-column justify-content ms-3 me-5">
+          <h5 class="ms-3"><%= novel.title %></h5>
+          <p class="ms-3"><%= novel.author.name %></p>
+          <div class="d-flex mt-5">
+            <button
+              class="btn_ btn-3 me-2 mt-auto"
+              onclick="location.href='/novels/update/<%= novel.id %>'"
+            >
+              <span>작품 정보 수정</span>
+            </button>
+
+            <button
+              class="btn_ btn-3 me-2 mt-auto"
+              data-bs-toggle="modal"
+              data-bs-target="#staticModal"
+              data-id="<%= novel.id %>"
+            >
+              <span>작품 삭제</span>
+            </button>
+
+            <button
+              class="btn_ btn-3 mt-auto"
+              onclick="location.href='/posts/new/<%= novel.id %>'"
+            >
+              <span>작품 연재 하기</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn_ btn-1 ms-auto me-5"
+        style="width: 150px"
+        onclick="location.href='/novels'"
+      >
+        새 작품 쓰기
+      </button>
+    </div>
+
+    <div
+      class="modal fade"
+      id="staticModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">삭제 요청</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">정말 삭제하실 겁니까?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="delete_btn"
+              onclick="deleteNovel()"
+            >
+              삭제
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    const myModalEl = document.getElementById("staticModal");
+    const myInpulEl = document.querySelector(".delete");
+    const deleteBtn = document.querySelector("#delete_btn");
+    $(".delete").click(function () {
+      var data = $(this).data("id");
+      deleteBtn.dataset.id = data;
+    });
+    myModalEl.addEventListener("shown.bs.modal", (event) => {
+      console.log(deleteBtn.dataset.id);
+    });
+    const deleteNovel = function () {
+      location.href = "/novels/delete/" + deleteBtn.dataset.id;
+    };
+  </script>
+</html>

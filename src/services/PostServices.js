@@ -1,6 +1,7 @@
 import * as PostRepository from "../repositories/PostRepository";
 import resFormat from "../utils/resFormat";
 import { dbNow } from "../utils/dayUtils";
+import edjsHTML from "editorjs-html";
 
 export const CreatePost = async (req, res, next) => {
   try {
@@ -14,13 +15,19 @@ export const CreatePost = async (req, res, next) => {
     } else if (!req.body.authorId) {
       res.data = resFormat.fail(403, "작가의 정보가 입력되지 않았습니다.");
       return res.send(res.data.message);
+    } else if (!req.body.title) {
+      res.data = resFormat.fail(403, "제목이 입력되지 않았습니다.");
+      return res.send(res.data.message);
     }
 
     let data = createOption(req.body);
 
     const response = await PostRepository.createPost(data);
+    const edjsParser = edjsHTML();
+    const content = edjsParser.parse(response.content);
     if (response) {
       req.post = response;
+      req.content = content;
       next();
     } else {
       res.redirect("/posts/new/" + req.body.novelId);
@@ -41,6 +48,9 @@ export const UpdatePost = async (req, res, next) => {
       return res.send(res.data.message);
     } else if (!req.body.authorId) {
       res.data = resFormat.fail(403, "작가의 정보가 입력되지 않았습니다.");
+      return res.send(res.data.message);
+    } else if (!req.body.title) {
+      res.data = resFormat.fail(403, "제목이 입력되지 않았습니다.");
       return res.send(res.data.message);
     }
 
@@ -76,9 +86,12 @@ export const DeletePost = async (req, res, next) => {
 export const ViewPost = async (req, res, next) => {
   try {
     const response = await PostRepository.findById(parseInt(req.params.id, 10));
+    const edjsParser = edjsHTML();
+    const content = edjsParser.parse(response.content);
     console.log(response);
     if (response) {
       req.post = response;
+      req.content = content;
       next();
     } else {
       res.redirect("/");
@@ -92,6 +105,7 @@ export const ViewPost = async (req, res, next) => {
 const createOption = (bodydata) => {
   // DB data 옵션 설정.
   const dataOption = {
+    title: bodydata.title,
     content: JSON.parse(bodydata.content),
     author: {
       connect: { id: parseInt(bodydata.authorId, 10) },
@@ -109,6 +123,7 @@ const createOption = (bodydata) => {
 const updateOption = (bodydata) => {
   // DB data 옵션 설정.
   const dataOption = {
+    title: bodydata.title,
     content: JSON.parse(bodydata.content),
     updatedAt: dbNow(),
   };

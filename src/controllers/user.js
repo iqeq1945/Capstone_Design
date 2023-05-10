@@ -11,10 +11,6 @@ Router.post("/", UserServices.SingUp);
 
 Router.get("/work", NovelServices.GetMyList);
 
-Router.get("/myjandy", function (req, res) {
-  res.render("user/myjandy");
-});
-
 Router.get("/detail", CashService.Get);
 
 Router.get("/cash", function (req, res) {

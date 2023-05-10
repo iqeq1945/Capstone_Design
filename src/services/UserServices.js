@@ -120,6 +120,20 @@ export const CreateSeed = async (req, res, next) => {
   }
 };
 
+export const DeleteSeed = async (req, res, next) => {
+  try {
+    const response = await UserRepository.deleteSeed(req.user.id);
+    if (response) {
+      next();
+    } else {
+      return res.redirect("/novels/" + parseInt(req.body.novelId, 10));
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};
+
 export const LikeOnNovel = async (req, res, next) => {
   try {
     const response = await UserRepository.LikeOnNovel(

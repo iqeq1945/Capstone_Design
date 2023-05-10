@@ -12,6 +12,7 @@ import HomeController from "./controllers/home";
 import UserController from "./controllers/user";
 import NovelController from "./controllers/novel";
 import PostController from "./controllers/post";
+import HistoryController from "./controllers/history";
 const app = express();
 
 dotenv.config();
@@ -49,6 +50,8 @@ app.use("/", HomeController);
 app.use("/users", UserController);
 app.use("/novels", NovelController);
 app.use("/posts", PostController);
+app.use("/histories", HistoryController);
+
 // Port setting
 const port = 3000;
 app.listen(port, function () {

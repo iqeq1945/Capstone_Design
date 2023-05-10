@@ -9,6 +9,10 @@ Router.get("/:id", NovelServices.GetInfo, function (req, res, next) {
   res.render("novels/index", { novel: req.novel });
 });
 
+Router.get("/detail/:id", NovelServices.GetInfo, function (req, res, next) {
+  res.render("novels/detail", { novel: req.novel });
+});
+
 Router.get("/", function (req, res) {
   res.render("novels/new");
 });

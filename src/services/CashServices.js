@@ -1,14 +1,11 @@
 import * as CashRepository from "../repositories/CashRepository";
-import resFormat from "../utils/resFormat";
 import { dbNow } from "../utils/dayUtils";
-import { GetMyList } from "./NovelServices";
 
 export const Create = async (req, res, next) => {
   try {
     const response = await CashRepository.createCash(
       createOption(req.user.id, parseInt(req.body.seed, 10))
     );
-	  console.log(response, "hihi");
     if (response) {
       res.redirect("/users/cash");
     } else {

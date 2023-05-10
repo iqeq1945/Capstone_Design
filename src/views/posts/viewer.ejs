@@ -3,19 +3,178 @@
   <head>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/css/viewer.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
   </head>
   <body>
     <nav
       class="viewer d-flex px-5 justify-content-around align-items-center fixed-top"
     >
-      <div class="title">제목들어갈곳</div>
+      <div class="title"><%= post.title %></div>
       <div class="link">
         <a href="#">이전화</a> |
         <a href="#">다음화</a>
       </div>
     </nav>
-    <div class="d-flex justify-content-between py-3 align-items-center">
-      <div><%= post %></div>
+    <div class="view">
+      <div class="content">
+        <div id="post" class="d-flex flex-column justify-content-start">
+          <% content.forEach(function(element, idx){ %>
+          <div class="line" id="<%=idx %>"><%- element %></div>
+          <% }) %>
+        </div>
+      </div>
+      <div class="options">
+        <div class="d-flex justify-content-end">
+          <span
+            id="option"
+            class="material-symbols-outlined"
+            style="font-size: 48px"
+          >
+            settings
+          </span>
+        </div>
+      </div>
+      <div class="modal_box">
+        <div class="modal_content">
+          <div class="d-flex flex-column">
+            <div class="d-flex justify-content-between">
+              <strong>뷰어 설정</strong
+              ><span id="close" class="material-symbols-outlined"> close </span>
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+              <span class="pe-5">글꼴</span>
+              <div class="d-flex font">
+                <span
+                  class="px-2 font1 select"
+                  style="
+                    font-family: 'Nanum Gothic', sans-serif;
+                    font-size: 15px;
+                  "
+                  >고딕체</span
+                >
+                <span
+                  class="px-2 font2"
+                  style="font-family: 'Nanum Myeongjo', serif; font-size: 15px"
+                  >명조체</span
+                >
+                <span
+                  class="px-2 font3"
+                  style="
+                    font-family: 'Gowun Dodum', sans-serif;
+                    font-size: 15px;
+                  "
+                  >돋움체</span
+                >
+              </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+              <span class="pe-5">글자 크기</span>
+
+              <div class="d-flex">
+                <span id="minus" class="material-symbols-outlined px-2">
+                  remove
+                </span>
+                <span id="font_size" class="px-2">3</span>
+                <span id="plus" class="material-symbols-outlined px-2">
+                  add
+                </span>
+              </div>
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+              <span class="pe-5">줄 간격</span>
+
+              <div class="d-flex">
+                <span id="line_minus" class="material-symbols-outlined px-2">
+                  remove
+                </span>
+                <span id="margin_bottom" class="px-2">1</span>
+                <span id="line_plus" class="material-symbols-outlined px-2">
+                  add
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
+  <script>
+    $("#option").click(function () {
+      $(".modal_box").fadeIn();
+    });
+
+    $("#close").click(function () {
+      $(".modal_box").fadeOut();
+    });
+    $(".font1").click(function () {
+      $("#post").css("font-family", "'Nanum Gothic', sans-serif");
+      $(".font1").addClass("select");
+      $(".font2").removeClass("select");
+      $(".font3").removeClass("select");
+    });
+    $(".font2").click(function () {
+      $("#post").css("font-family", "'Nanum Myeongjo', serif");
+      $(".font2").addClass("select");
+      $(".font1").removeClass("select");
+      $(".font3").removeClass("select");
+    });
+    $(".font3").click(function () {
+      $("#post").css("font-family", "'Gowun Dodum', sans-serif");
+      $(".font3").addClass("select");
+      $(".font2").removeClass("select");
+      $(".font1").removeClass("select");
+    });
+
+    $("#minus").click(function () {
+      if (Number($("#font_size").text()) > 1) {
+        $("#font_size").text(Number($("#font_size").text()) - 1);
+        let size = 2 * Number($("#font_size").text()) + 12;
+        $("#post").css("font-size", size + `px`);
+      }
+    });
+    $("#plus").click(function () {
+      if (Number($("#font_size").text()) < 10) {
+        $("#font_size").text(Number($("#font_size").text()) + 1);
+        let size = 2 * Number($("#font_size").text()) + 12;
+        $("#post").css("font-size", size + `px`);
+      }
+    });
+
+    $("#line_minus").click(function () {
+      if (Number($("#margin_bottom").text()) > 1) {
+        $("#margin_bottom").text(Number($("#margin_bottom").text()) - 1);
+        let size = 5 * (Number($("#margin_bottom").text()) - 1);
+        $(".line").css("margin-bottom", size + `px`);
+      }
+    });
+    $("#line_plus").click(function () {
+      if (Number($("#margin_bottom").text()) < 5) {
+        $("#margin_bottom").text(Number($("#margin_bottom").text()) + 1);
+        let size = 5 * (Number($("#margin_bottom").text()) - 1);
+        $(".line").css("margin-bottom", size + `px`);
+      }
+    });
+  </script>
 </html>

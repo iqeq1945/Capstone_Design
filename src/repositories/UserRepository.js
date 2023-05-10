@@ -21,6 +21,9 @@ export const findById = async (id) => {
       where: {
         id: id,
       },
+      include: {
+        history: true,
+      },
     });
   } catch (err) {
     console.error(err);
@@ -74,6 +77,21 @@ export const createSeed = async (id, seed) => {
       data: {
         seed: {
           increment: seed,
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const deleteSeed = async (id) => {
+  try {
+    return await prisma.user.update({
+      where: { id },
+      data: {
+        seed: {
+          decrement: 1,
         },
       },
     });

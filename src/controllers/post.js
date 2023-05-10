@@ -13,11 +13,11 @@ Router.get("/new/:novelId", function (req, res) {
 });
 
 Router.post("/new", PostServices.CreatePost, function (req, res) {
-  res.render("posts/viewer", { post: req.post });
+  res.render("posts/viewer", { post: req.post, content: req.content });
 });
 
 Router.get("/view/:id", PostServices.ViewPost, function (req, res) {
-  res.render("posts/viewer", { post: req.post });
+  res.render("posts/viewer", { post: req.post, content: req.content });
 });
 
 Router.post("/upload", upload.single("file"), function (req, res) {
