@@ -3,7 +3,7 @@ body {
   height: 100vh;
 }
 
-.modal_box {
+.modal_box2 {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -14,7 +14,7 @@ body {
   z-index: 100;
   display: none;
 }
-.modal_content {
+.modal_content2 {
   width: 350px;
   height: 250px;
   background: #fff;

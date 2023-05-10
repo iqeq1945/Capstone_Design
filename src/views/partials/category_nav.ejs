@@ -95,26 +95,34 @@
         <span style="color: #9acd32"><%= currentUser.seed %></span>
       </div>
       <div class="d-flex flex-column">
+
         <div class="d-flex justify-content-around">
-          <div class="d-flex flex-column">
-            <span class="material-symbols-outlined icon_ft"> menu_book </span>
+          <div class="d-flex flex-column" onclick="location.href='/users/library'">
+            <span class="material-symbols-outlined icon_ft">
+              menu_book
+            </span>
             <p>서재</p>
           </div>
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column"onclick="location.href='/users/work'">
             <span class="material-symbols-outlined icon_ft"> edit </span>
-            <p>연재</p>
+          <p>연재</p>
           </div>
+  
         </div>
         <div class="d-flex justify-content-around">
-          <div class="d-flex flex-column">
-            <span class="material-symbols-outlined icon_ft"> psychiatry </span>
-            <span>씨앗</span>
+          <div class="d-flex flex-column" onclick="location.href='/users/cash'">
+            <span class="material-symbols-outlined icon_ft">
+              psychiatry
+             </span>
+                       <span>씨앗</span>
           </div>
-
-          <div class="d-flex flex-column">
-            <span class="material-symbols-outlined icon_ft"> credit_card </span>
-            <spa>내역</spa>
-          </div>
+         
+          <div class="d-flex flex-column" onclick="location.href='/users/detail'">
+            <span class="material-symbols-outlined icon_ft">
+              credit_card
+            </span>
+            <span>내역</span>
+          </div>   
         </div>
       </div>
     </div>

@@ -109,7 +109,7 @@
                 <span id="line_minus" class="material-symbols-outlined px-2">
                   remove
                 </span>
-                <span id="margin_bottom" class="px-2">1</span>
+                <span id="margin_bottom" class="px-2">3</span>
                 <span id="line_plus" class="material-symbols-outlined px-2">
                   add
                 </span>
@@ -165,14 +165,14 @@
     $("#line_minus").click(function () {
       if (Number($("#margin_bottom").text()) > 1) {
         $("#margin_bottom").text(Number($("#margin_bottom").text()) - 1);
-        let size = 5 * (Number($("#margin_bottom").text()) - 1);
+        let size = 5 * Number($("#margin_bottom").text()) + 5;
         $(".line").css("margin-bottom", size + `px`);
       }
     });
     $("#line_plus").click(function () {
-      if (Number($("#margin_bottom").text()) < 5) {
+      if (Number($("#margin_bottom").text()) < 10) {
         $("#margin_bottom").text(Number($("#margin_bottom").text()) + 1);
-        let size = 5 * (Number($("#margin_bottom").text()) - 1);
+        let size = 5 * Number($("#margin_bottom").text()) + 5;
         $(".line").css("margin-bottom", size + `px`);
       }
     });
