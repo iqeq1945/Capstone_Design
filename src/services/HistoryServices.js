@@ -1,15 +1,17 @@
-import * as HistoryRepository from "../repositories/HistoryRepository";
-import resFormat from "../utils/resFormat";
+import * as HistoryRepository from "../repositories/HistroyRepository";
 import { dbNow } from "../utils/dayUtils";
 
 export const Create = async (req, res, next) => {
   try {
-    const response = await HistoryRepository.create(req.body);
-    console.log(response);
+    const data = createOption(req.body, req.user.id);
+    const response = await HistoryRepository.createHistory(data);
+    console.log(data.postId);
     if (response) {
-      return res.send("성공");
+      res.redirect("/posts/view/" + parseInt(req.body.postId, 10));
+      next();
     } else {
-      return res.send("실패");
+      res.redirect("/novels/" + parseInt(req.body.novelId, 10));
+      next();
     }
   } catch (err) {
     console.error(err);
@@ -32,4 +34,19 @@ export const Get = async (req, res, next) => {
     console.error(err);
     next(err);
   }
+};
+
+const createOption = (bodydata, buyerId) => {
+  // DB data 옵션 설정.
+  const dataOption = {
+    buyer: {
+      connect: { id: parseInt(buyerId, 10) },
+    },
+    post: {
+      connect: { id: parseInt(bodydata.postId, 10) },
+    },
+    createdAt: dbNow(),
+  };
+
+  return dataOption;
 };

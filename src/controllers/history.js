@@ -1,9 +1,9 @@
 import express from "express";
 import * as HistoryServices from "../services/HistoryServices";
-
+import * as UserServices from "../services/UserServices";
 const Router = express.Router();
 
-Router.post("/", HistoryServices.Create);
+Router.post("/", UserServices.DeleteSeed, HistoryServices.Create);
 
 Router.get("/", HistoryServices.Get);
 

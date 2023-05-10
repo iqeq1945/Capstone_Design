@@ -1,0 +1,20 @@
+span.icon {
+  font-size: 32px;
+}
+
+span.icon_ft {
+  font-size: 48px;
+}
+
+.bg_green {
+  background-color: #e6ffe9;
+}
+
+.bd {
+  border: 4px inset #53ec53;
+  border-radius: 5px;
+}
+
+.ft_poor {
+  font-family: "Poor Story", cursive;
+}

@@ -25,7 +25,6 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
 />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <nav class="navbar navbar-expand-sm navbar-light bg-custom py-2">
   <div class="container" style="margin-left: 15%; margin-right: 10%">
     <h5 class="mt-3" style="cursor: pointer" onclick="location.href='/'">
@@ -33,8 +32,8 @@
     </h5>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="d-flex justify-content-around mx-5 mt-3">
-        <a href="/" class="me-5 nav nav_focus">추천</a>
-        <a href="/novels/category/전체" class="me-5 nav">카테고리</a>
+        <a href="/" class="me-5 nav">추천</a>
+        <a href="/novels/category/전체" class="me-5 nav nav_focus">카테고리</a>
       </div>
       <ul class="navbar-nav ms-auto">
         <form
@@ -64,7 +63,7 @@
           >
         </li>
         <% if(isAuthenticated){ %>
-        <li class="nav-item mt-1">
+          <li class="nav-item mt-1">
           
             <span id="person" style="cursor: pointer; padding:8px" class="material-symbols-outlined icon"> person </span></
           
@@ -92,10 +91,8 @@
     <div class="d-flex flex-column">
       <span class="mx-auto p-2 name"><%= currentUser.name %>님</span>
       <div class="d-flex justify-content-between bg_gray p-1 m-2">
-
-        <span class="material-symbols-outlined">
-          potted_plant
-          </span> <span style="color: #9acd32"><%= currentUser.seed %></span>
+        <span class="material-symbols-outlined"> potted_plant </span>
+        <span style="color: #9acd32"><%= currentUser.seed %></span>
       </div>
       <div class="d-flex flex-column">
 
@@ -124,11 +121,10 @@
             <span class="material-symbols-outlined icon_ft">
               credit_card
             </span>
-            <spa>내역</spa>
+            <span>내역</span>
           </div>   
         </div>
       </div>
-      
     </div>
   </div>
 </div>
@@ -138,9 +134,9 @@
   });
 
   $(document).mouseup(function () {
-  if($(".modal_box").is(":visible")){
-    $(".modal_box").fadeOut();
-  }
+    if ($(".modal_box").is(":visible")) {
+      $(".modal_box").fadeOut();
+    }
   });
 </script>
 <% }%>

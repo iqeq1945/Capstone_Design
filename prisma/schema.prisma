@@ -18,6 +18,8 @@ model User {
   post     Post[]
   cash     Cash[]
   like     Like[]
+  star     Star[]
+  comment  Comment[]
   @@map("users")
 }
 
@@ -32,6 +34,7 @@ model Novel {
   createdAt DateTime
   updatedAt DateTime
   author    User     @relation(fields: [authorId], references: [id])
+  history   History[]
   post      Post[]
   like      Like[]
   @@index([authorId], map: "novels_authorId_fkey")
@@ -40,7 +43,7 @@ model Novel {
 
 model Post {
   id        Int       @id @default(autoincrement())
-  title     String
+  title     String @db.VarChar(200)
   content   Json   @db.Json
   authorId  Int
   novelId   Int
@@ -49,7 +52,8 @@ model Post {
   author    User      @relation(fields: [authorId], references: [id])
   novel     Novel     @relation(fields: [novelId], references: [id])
   history   History[]
-
+  star      Star[]
+  comment   Comment[]
   @@index([authorId], map: "posts_authorId_fkey")
   @@index([novelId], map: "posts_novelId_fkey")
   @@map("posts")
@@ -58,9 +62,11 @@ model Post {
 model History {
   id        Int      @id @default(autoincrement())
   buyerId   Int
+  novelId   Int
   postId    Int
   createdAt DateTime
   buyer     User     @relation(fields: [buyerId], references: [id])
+  novel     Novel @relation(fields: [novelId], references: [id])
   post      Post     @relation(fields: [postId], references: [id])
 
   @@index([buyerId], map: "histories_buyerId_fkey")
@@ -87,4 +93,28 @@ model Like {
 
   @@id([userId, novelId], name:"likeKey")
   @@map("likes")
+}
+
+model Star {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  createdAt DateTime
+  star   Int
+  @@id([userId, postId], name:"starKey")
+  @@map("starts")
+}
+
+model Comment {
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  createdAt DateTime
+  updatedAt DateTime
+  content String
+
+  @@id([userId, postId], name:"comment")
+  @@map("comments")
 }

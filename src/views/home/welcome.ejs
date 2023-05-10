@@ -3,6 +3,8 @@
   <head>
     <%- include('../partials/head') %>
     <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   </head>
   <body>
     <%- include('../partials/nav') %>
@@ -12,8 +14,9 @@
         <div class="slide_wrap">
           <div class="slide_box">
             <div class="slide_list clearfix">
-              <div class="slide_content slide01">
-                <img src="/img/main.png" alt="1" width="800px;" height="400px;">
+              <div class="slide_content slide01" style="background-image: url('/img/02.jpg'); background-size: cover; border-radius:15px;">
+                <p class="px-2 py-1">잔디 노벨 OPEN! <br> <small>오픈 이벤트!</small></p>
+                
               </div>
               <div class="slide_content slide02">
                 <p>2</p>
@@ -32,8 +35,12 @@
           </div>
           <!-- // .slide_box -->
           <div class="slide_btn_box">
-            <button type="button" class="slide_btn_prev">Prev</button>
-            <button type="button" class="slide_btn_next">Next</button>
+            <span class="slide_btn_prev material-symbols-outlined">
+              arrow_back_ios
+              </span>
+           <span class="slide_btn_next material-symbols-outlined">
+              arrow_forward_ios
+              </span>
           </div>
           <!-- // .slide_btn_box -->
           <ul class="slide_pagination"></ul>

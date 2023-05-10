@@ -12,3 +12,66 @@ a {
   text-decoration: none;
   color: white;
 }
+
+.view {
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  top: 200px;
+  padding-left: 25%;
+  padding-right: 25%;
+  font-size: 18px;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  padding-right: 20%;
+  top: 750px;
+}
+#option {
+  cursor: pointer;
+}
+
+.modal_box {
+  position: absolute;
+  height: 100%;
+  top: 650px;
+  left: 70%;
+  padding-right: 20%;
+  display: none;
+}
+.modal_content {
+  width: 350px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+  padding: 20px 15px;
+  line-height: 23px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px #999;
+}
+.font {
+  color: gray;
+}
+.select {
+  color: black;
+}
+
+p {
+  margin: 0;
+}
+
+.line {
+  margin-bottom: 20px;
+}

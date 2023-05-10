@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientUnknownRequestError } from "@prisma/client/runtime";
-
+import { dbNow } from "../utils/dayUtils";
 const prisma = new PrismaClient();
 
 export const findByEmail = async (email) => {
@@ -20,6 +20,9 @@ export const findById = async (id) => {
     return await prisma.user.findUnique({
       where: {
         id: id,
+      },
+      include: {
+        history: true,
       },
     });
   } catch (err) {
@@ -82,6 +85,21 @@ export const createSeed = async (id, seed) => {
   }
 };
 
+export const deleteSeed = async (id) => {
+  try {
+    return await prisma.user.update({
+      where: { id },
+      data: {
+        seed: {
+          decrement: 1,
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const LikeOnNovel = async (userId, novelId) => {
   try {
     return await prisma.user.update({
@@ -90,14 +108,16 @@ export const LikeOnNovel = async (userId, novelId) => {
       },
       data: {
         like: {
-          create: {
-            novel: {
-              connect: {
-                id: novelId,
+          create: [
+            {
+              novel: {
+                connect: {
+                  id: novelId,
+                },
               },
+              createdAt: dbNow(),
             },
-            createdAt: dbNow(),
-          },
+          ],
         },
       },
     });

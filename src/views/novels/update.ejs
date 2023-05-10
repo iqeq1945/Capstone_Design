@@ -8,7 +8,7 @@
   <body>
     <div class="container mb-3 mt-5">
       <h3>작품 정보 수정</h3>
-      <form action="/novels/update/<%= data.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+      <form action="/novels/update/<%= data.id %>?_method=PUT" method="post" enctype="multipart/form-data" onsubmit="test()">
         <div class="form-group my-1">
           연재 주기
           <label><input type="checkbox" name="cycle" value="월" /> 월</label>
@@ -64,7 +64,7 @@
             value = "<%= data.image %>"
           />
         </div>
-        <img class="form-group my-1" id="preview" src="/upload/<%= data.image %>"></img>
+        <img class="form-group my-1" id="preview" src="<%= data.image %>"></img>
         <div>
           <a class="btn btn-primary" href="/users">취소</a>
           <button type="submit" class="btn btn-primary">수정하기</button>
@@ -90,6 +90,14 @@
       } else {
         document.getElementById("preview").src = "";
       }
+    }
+    function test() {
+      const input = document.querySelectorAll('input');
+      input.forEach(function (element){
+        console.log(element.value)
+      })
+      alert('stop');
+      return false;
     }
   </script>
 </html>

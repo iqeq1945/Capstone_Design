@@ -11,6 +11,12 @@ export const findById = async (id) => {
       },
       include: {
         post: true,
+        like: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
   } catch (err) {
@@ -102,6 +108,13 @@ export const findByauthor = async (authorId) => {
   try {
     return await prisma.novel.findMany({
       where: { authorId },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   } catch (err) {
     console.error(err);

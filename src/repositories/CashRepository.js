@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaClientUnknownRequestError } from "@prisma/client/runtime";
-import { dbNow } from "../utils/dayUtils";
+
 const prisma = new PrismaClient();
 
 export const findById = async (id) => {

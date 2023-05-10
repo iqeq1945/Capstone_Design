@@ -1,137 +1,198 @@
-<!-- views/posts/index.ejs -->
-
 <!DOCTYPE html>
 <html>
   <head>
     <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/novel.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+      }
+    </style>
   </head>
   <body>
     <%- include('../partials/nav') %>
-    <div class="wrap mx-auto mt-5" style="width: 800px">
-      <div class="d-flex px-5 py-3 border border-dark">
-        <div class="d-flex flex-column">
-          <img
-            src="<%= novel.image %>"
-            width="200px;"
-            height="280px;"
-            alt="book_cover"
-          />
-          <button type="button" class="btn btn-success">좋아요!</button>
-        </div>
-        <div class="d-flex flex-column pt-5 ms-5">
-          <h2><%= novel.title %></h2>
+    <div class="d-flex mx-auto mt-5" style="width: 800px">
+      <div class="d-flex flex-column profile bg_gray">
+        <div
+          class="d-flex flex-column"
+          style="
+            width: 100%;
+            height: 350px;
+            background-image: url('<%= novel.image %>');
+            filter: blur(5px);
+            -webkit-filter: blur(10px);
+            background-size: cover;
+          "
+        ></div>
+        <img
+          src="<%= novel.image %>"
+          style="position: absolute; left: 18%; top: 8%; border-radius: 15px"
+          width="200px;"
+          height="280px;"
+          alt="book_cover"
+        />
+        <div class="d-flex flex-column align-items-center pt-5 mx-5">
+          <h3><%= novel.title %></h3>
 
-          <div class="d-flex flex-column my-3">
-            <span><%= novel.author %></span>
-            <span>총 <%= novel.post.length %>화</span>
+          <div class="d-flex flex-column justify-content-center my-3">
+            <p><%= novel.category %> | <%= novel.cycle %> 연재</p>
+            <p><%= novel.author.name %></p>
           </div>
+          <% var chk=false; %> <% novel.like.forEach(function(element) { %> <%
+          if(element.userId == currentUser.id)chk=true; %> <% }); %> <%
+          if(!chk){ %>
+
+          <img
+            id="like"
+            src="/img/favorite_FILL0_wght500_GRAD0_opsz48.png"
+            style="cursor: pointer"
+            width="28px"
+            data-id="<%= novel.id %>"
+            class="material-symbols-outlined"
+            onclick="LikeOn()"
+          />
+
+          <% } else {%>
+
+          <img
+            id="unlike"
+            width="28px"
+            style="cursor: pointer"
+            src="/img/favorite_FILL1_wght500_GRAD0_opsz48.png"
+            data-id="<%= novel.id %>"
+            onclick="unLikeOn()"
+            class="material-symbols-outlined"
+          />
+
+          <% } %>
           <div class="d-flex flex-column my-3">
             <p>작품소개</p>
             <p><%= novel.content %></p>
           </div>
         </div>
       </div>
-      <div class="row my-5 border-top">
-        <div class="col-12 my-3">
+      <div class="d-flex flex-column ms-3 px-5 py-2 bg_gray flex-fill">
+        <div class="d-flex flex-column my-3">
           <div class="d-flex mb-3">
-            <h4>연재 목록</h4>
-            <button class="btn btn-dark ms-auto">구매하기</button>
+            <div class="me-2">
+              <span class="px-1 py-1 round">연재 목록</span>
+            </div>
+            <div><span class="px-1 py-1 round">공지</span></div>
           </div>
-
+          <span>총 <%= novel.post.length %>화</span>
+          <hr />
           <ul class="list-group">
+            <% novel.post.forEach(function(post,idx){ %> <%
+            if(currentUser.history.find(e => e.postId === post.id )) {%>
+            console.log(e);
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              data-title="<%= post.title %>"
+              data-id="<%= post.id %>"
+              class="list-group-item d-flex align-items-center justify-content-between history"
+              onclick="location.href='/posts/view/<%= post.id %>'"
             >
-              <div class="d-flex">
-                <label for="check1"
-                  ><input type="checkbox" id="check1" />
-                  <span> 1화 </span>
-                </label>
-              </div>
-
-              <button class="btn btn-primary">New</button>
+              <span> <%= post.title %> </span>
+              <span><%= post.updatedAt.toLocaleDateString() %></span>
             </li>
+            <%} else{ %>
             <li
-              class="list-group-item d-flex justify-content-between align-items-center"
+              data-title="<%= post.title %>"
+              data-id="<%= post.id %>"
+              class="list-group-item d-flex align-items-center justify-content-between posts"
             >
-              <div class="d-flex">
-                <label for="check2"
-                  ><input type="checkbox" id="check2" />
-                  <span> 2화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
+              <span> <%= post.title %> </span>
+              <span><%= post.updatedAt.toLocaleDateString() %></span>
             </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check3"
-                  ><input type="checkbox" id="check3" />
-                  <span> 3화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
-            </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check4"
-                  ><input type="checkbox" id="check4" />
-                  <span> 4화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
-            </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check1"
-                  ><input type="checkbox" id="check1" />
-                  <span> 1화 </span>
-                </label>
-              </div>
-
-              <button class="btn btn-primary">New</button>
-            </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check2"
-                  ><input type="checkbox" id="check2" />
-                  <span> 2화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
-            </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check3"
-                  ><input type="checkbox" id="check3" />
-                  <span> 3화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
-            </li>
-            <li
-              class="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <div class="d-flex">
-                <label for="check4"
-                  ><input type="checkbox" id="check4" />
-                  <span> 4화 </span>
-                </label>
-              </div>
-              <button class="btn btn-primary">New</button>
-            </li>
+            <%}}) %>
           </ul>
+        </div>
+      </div>
+      <div class="modal_box2">
+        <div class="modal_content2">
+          <form action="/histories" method="post" class="d-flex flex-column">
+            <h5 class="postTitle text-center"></h5>
+            <hr />
+            <span class="text-center"
+              >씨앗 <%= currentUser.seed %> 개 보유</span
+            >
+            <% if(currentUser.seed>0) { %>
+            <button type="submit" class="mt-4 btn btn-primary">구매</button>
+            <%} else { %>
+            <button class="mt-4 btn btn-secondary" disabled>구매</button>
+            <%}%>
+            <button id="close" class="mt-1 btn btn-primary" type="button">
+              취소
+            </button>
+            <input type="hidden" name="postId" id="postId" value="" />
+            <input
+              type="hidden"
+              name="novelId"
+              id="novelId"
+              value="<%= novel.id %>"
+            />
+          </form>
         </div>
       </div>
     </div>
   </body>
+  <script>
+    function LikeOn() {
+      let btn = document.getElementById("like");
+      let novelId = btn.dataset["id"];
+
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          data: {
+            novelId: novelId,
+          },
+          type: "POST",
+          url: "/users/like",
+          dataType: "json",
+          success: function (result) {
+            alert("좋아요 성공!");
+            document.location.href = document.location.href;
+          },
+        });
+      });
+    }
+
+    function unLikeOn() {
+      let btn = document.getElementById("unlike");
+      let novelId = btn.dataset["id"];
+
+      return new Promise((resolve, reject) => {
+        $.ajax({
+          data: {
+            novelId: novelId,
+          },
+          type: "POST",
+          url: "/users/unlike",
+          dataType: "json",
+          success: function (result) {
+            alert("좋아요 취소!");
+            document.location.href = document.location.href;
+          },
+        });
+      });
+    }
+    $(".posts").click(function () {
+      let post = $(this);
+
+      $(".postTitle").text(post.data("title"));
+      $("#postId").val(post.data("id"));
+      $(".modal_box2").fadeIn();
+    });
+
+    $("#close").click(function () {
+      $(".modal_box2").fadeOut();
+    });
+  </script>
 </html>
