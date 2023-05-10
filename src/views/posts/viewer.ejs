@@ -118,6 +118,11 @@
           </div>
         </div>
       </div>
+      <div class="chat_box">
+        <div class="chat_content">
+          <span id="cite"> </span>
+        </div>
+      </div>
     </div>
   </body>
   <script>
@@ -175,6 +180,14 @@
         let size = 5 * Number($("#margin_bottom").text()) + 5;
         $(".line").css("margin-bottom", size + `px`);
       }
+    });
+
+    $(".line").click(function () {
+      $("#cite").text($(this).text());
+      $(".chat_box").fadeIn();
+    });
+    $(document).mouseup(function () {
+      $(".chat_box").fadeOut();
     });
   </script>
 </html>

@@ -5,7 +5,6 @@ export const Create = async (req, res, next) => {
   try {
     const data = createOption(req.body, req.user.id);
     const response = await HistoryRepository.createHistory(data);
-    console.log(data.postId);
     if (response) {
       res.redirect("/posts/view/" + parseInt(req.body.postId, 10));
       next();
@@ -44,6 +43,9 @@ const createOption = (bodydata, buyerId) => {
     },
     post: {
       connect: { id: parseInt(bodydata.postId, 10) },
+    },
+    novel: {
+      connect: { id: parseInt(bodydata.novelId, 10) },
     },
     createdAt: dbNow(),
   };

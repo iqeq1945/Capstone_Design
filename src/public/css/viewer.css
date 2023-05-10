@@ -73,5 +73,44 @@ p {
 }
 
 .line {
+  cursor: pointer;
   margin-bottom: 20px;
+  color: #000;
+  display: inline-block;
+
+  text-transform: uppercase;
+}
+
+.line:after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px lightgreen;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  transform-origin: 0% 50%;
+}
+.line:hover:after {
+  transform: scaleX(1);
+}
+.chat_box {
+  position: absolute;
+  height: 100%;
+  top: 300px;
+  left: 50%;
+  padding-right: 20%;
+}
+.chat_content {
+  width: 350px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+  padding: 20px 15px;
+  line-height: 23px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px #999;
 }
