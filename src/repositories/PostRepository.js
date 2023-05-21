@@ -8,6 +8,9 @@ export const findById = async (id) => {
       where: {
         id: id,
       },
+      include: {
+        novel: true,
+      },
     });
   } catch (err) {
     console.error(err);
@@ -24,10 +27,10 @@ export const createPost = async (data) => {
   }
 };
 
-export const updatePost = async (data) => {
+export const updatePost = async (data, id) => {
   try {
     return await prisma.post.update({
-      where: { id: data.id },
+      where: { id },
       data,
     });
   } catch (err) {
@@ -39,6 +42,24 @@ export const deletePost = async (id) => {
   try {
     return await prisma.post.delete({
       where: { id },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const findNextById = async (id, novelId, take) => {
+  try {
+    return await prisma.post.findMany({
+      take,
+      skip: Math.abs(take),
+      cursor: { id },
+      where: {
+        novelId,
+      },
+      include: {
+        novel: true,
+      },
     });
   } catch (err) {
     console.error(err);

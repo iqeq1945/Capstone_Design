@@ -60,7 +60,6 @@ model Post {
 }
 
 model History {
-  id        Int      @id @default(autoincrement())
   buyerId   Int
   novelId   Int
   postId    Int
@@ -69,8 +68,7 @@ model History {
   novel     Novel @relation(fields: [novelId], references: [id])
   post      Post     @relation(fields: [postId], references: [id])
 
-  @@index([buyerId], map: "histories_buyerId_fkey")
-  @@index([postId], map: "histories_postId_fkey")
+  @@id([buyerId,postId], name:"historyKey")
   @@map("histories")
 }
 

@@ -38,6 +38,9 @@ export const getMyCash = async (id) => {
   try {
     return await prisma.cash.findMany({
       where: { buyerId: id },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   } catch (err) {
     console.error(err);

@@ -2,6 +2,8 @@ import express from "express";
 import * as UserServices from "../services/UserServices";
 import * as CashService from "../services/CashServices";
 import * as NovelServices from "../services/NovelServices";
+import * as HistoryServices from "../services/HistoryServices";
+import * as AuthHandler from "../middlewares/AuthHandler";
 const Router = express.Router();
 
 Router.get("/signup", function (req, res) {
@@ -9,21 +11,47 @@ Router.get("/signup", function (req, res) {
 });
 Router.post("/", UserServices.SingUp);
 
-Router.get("/work", NovelServices.GetMyList);
+Router.get("/work", AuthHandler.isLoggedIn, NovelServices.GetMyList);
 
-Router.get("/detail", CashService.Get);
+Router.get("/detail", AuthHandler.isLoggedIn, CashService.Get);
 
-Router.get("/cash", function (req, res) {
+Router.get("/cash", AuthHandler.isLoggedIn, function (req, res) {
   res.render("user/cash");
 });
 
-Router.post("/cash", UserServices.CreateSeed, CashService.Create);
+Router.get(
+  "/library",
+  AuthHandler.isLoggedIn,
+  HistoryServices.Get,
+  function (req, res) {
+    res.render("user/library", {
+      data: res.history,
+    });
+  }
+);
 
-Router.post("/like", UserServices.LikeOnNovel, function (req, res) {
-  res.json("좋아요 성공");
-});
+Router.post(
+  "/cash",
+  AuthHandler.isLoggedIn,
+  UserServices.CreateSeed,
+  CashService.Create
+);
 
-Router.post("/unlike", UserServices.unLikeOnNovel, function (req, res) {
-  res.json("좋아요 취소 성공");
-});
+Router.post(
+  "/like",
+  AuthHandler.isLoggedIn,
+  UserServices.LikeOnNovel,
+  function (req, res) {
+    res.json("좋아요 성공");
+  }
+);
+
+Router.post(
+  "/unlike",
+  AuthHandler.isLoggedIn,
+  UserServices.unLikeOnNovel,
+  function (req, res) {
+    res.json("좋아요 취소 성공");
+  }
+);
 export default Router;

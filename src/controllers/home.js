@@ -1,11 +1,12 @@
 import express from "express";
 import * as AuthHandler from "../middlewares/AuthHandler";
 import * as UserServices from "../services/UserServices";
+import * as NovelServices from "../services/NovelServices";
 import * as ImageServices from "../services/ImageServices";
 const Router = express.Router();
 
-Router.get("/", function (req, res) {
-  res.render("home/welcome", { user: req.user });
+Router.get("/", NovelServices.GetListWithLike, function (req, res) {
+  res.render("home/welcome", { user: req.user, novel: res.data });
 });
 
 Router.get("/login", AuthHandler.isNotLoggedIn, function (req, res) {

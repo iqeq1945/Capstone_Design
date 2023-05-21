@@ -8,9 +8,10 @@
   <body>
     <div class="container mb-3 mt-5">
       <h3>작품 정보 수정</h3>
-      <form action="/novels/update/<%= data.id %>?_method=PUT" method="post" enctype="multipart/form-data" onsubmit="test()">
+      <form action="/novels/update/<%= data.id %>?_method=PUT" method="post" enctype="multipart/form-data">
         <div class="form-group my-1">
           연재 주기
+          
           <label><input type="checkbox" name="cycle" value="월" /> 월</label>
           <label><input type="checkbox" name="cycle" value="화" /> 화</label>
           <label><input type="checkbox" name="cycle" value="수" /> 수</label>
@@ -40,7 +41,7 @@
             type="text"
             id="title"
             name="title"
-            value=<%= data.title %>
+            value='<%= data.title %>'
             class="form-control"
           />
         </div>
@@ -70,7 +71,7 @@
           <button type="submit" class="btn btn-primary">수정하기</button>
         </div>
         
-        <input type="hidden" id="novelId" name="novelId" value=<%= data.novelId %>>
+        <input type="hidden" id="novelId" name="novelId" value=<%= data.id %>>
       </form>
     </div>
     <div class="errors">
@@ -91,13 +92,24 @@
         document.getElementById("preview").src = "";
       }
     }
-    function test() {
-      const input = document.querySelectorAll('input');
-      input.forEach(function (element){
-        console.log(element.value)
-      })
-      alert('stop');
-      return false;
+    
+    const cycle=document.querySelectorAll('input[name="cycle"]');
+    let str = '<%= data.cycle %>';
+    let arr = str.split(',');
+   
+    for(var j=0; j<arr.length; j++) {
+      for(var i=0; i<cycle.length;i++){
+        if(arr[j]==cycle[i].value){
+          cycle[i].checked=1;
+        }
+      }
+    }
+    const category = document.querySelectorAll('input[name="category"]');
+    let kind = '<%= data.category %>';
+    for(var k=0;k<3;k++){
+      if(kind==category[k].value){
+        category[k].checked=1;
+      }
     }
   </script>
 </html>

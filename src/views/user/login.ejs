@@ -7,19 +7,27 @@
   <div class="form-container sign-up-container">
     <form action="/users" method="post">
       <h1>계정 생성</h1>
-      <input type="email" id="email" name="email" placeholder="이메일" />
-      <input type="text" id="name" name="name" placeholder="닉네임" />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="이메일"
+        required
+      />
+      <input type="text" id="name" name="name" placeholder="닉네임" required />
       <input
         type="password"
         id="password"
         name="password"
         placeholder="비밀번호"
+        required
       />
       <input
         type="password"
         id="passwordConfirmation"
         name="passwordConfirmation"
         placeholder="비밀번호 확인"
+        required
       />
       <button>회원 가입</button>
     </form>
@@ -27,12 +35,19 @@
   <div class="form-container sign-in-container">
     <form action="/login" method="post">
       <h1>로그인</h1>
-      <input type="email" id="email" name="email" placeholder="이메일" />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="이메일"
+        required
+      />
       <input
         type="password"
         id="password"
         name="password"
         placeholder="비밀번호"
+        required
       />
       <button type="submit">로그인</button>
     </form>

@@ -28,9 +28,9 @@
           새 작품 쓰기
         </button>
       </div>
-      <div class="d-flex flex-column">
+      <div class="d-flex flex-wrap justify-content-between">
         <% data.forEach(function(novel, index) { %>
-        <div class="d-flex my-5">
+        <div class="d-flex my-5" style="width: 50%">
           <div
             class="d-flex my-1 align-items-center"
             style="height: 150px; cursor: pointer"
@@ -38,7 +38,8 @@
           >
             <img
               src="<%= novel.image %>"
-              width="20%"
+              width="120px"
+              height="180px"
               alt=""
               target="_blank"
               style="border-radius: 15px"
@@ -54,31 +55,7 @@
               >
             </div>
 
-            <span class="material-symbols-outlined me-5"> menu </span>
-          </div>
-          <div
-            class="d-flex my-1 align-items-center flex-fill"
-            style="height: 150px; cursor: pointer"
-          >
-            <img
-              src="<%= novel.image %>"
-              width="20%"
-              alt=""
-              target="_blank"
-              style="border-radius: 15px"
-            />
-            <div class="d-flex flex-column flex-grow-1 ms-3">
-              <h5 class="ms-3"><%= novel.title %></h5>
-              <span class="ms-3"
-                ><%= novel.category %> - <%= novel.cycle %>
-              </span>
-              <span class="ms-3"><%= novel.author.name %></span>
-              <span class="ms-3"
-                ><%= novel.updatedAt.toLocaleDateString() %></span
-              >
-            </div>
-
-            <span class="material-symbols-outlined me-5"> menu </span>
+            <span class="material-symbols-outlined mx-2"> menu </span>
           </div>
         </div>
         <%})%>

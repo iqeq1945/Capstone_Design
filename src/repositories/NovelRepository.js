@@ -24,6 +24,30 @@ export const findById = async (id) => {
   }
 };
 
+export const findByIdwithLike = async () => {
+  try {
+    return await prisma.novel.findMany({
+      include: {
+        post: true,
+        like: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        like: {
+          _count: "desc",
+        },
+      },
+      take: 8,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const createNovel = async (data) => {
   try {
     return await prisma.novel.create({
@@ -79,6 +103,11 @@ export const findByKeyword = async (keyword) => {
           select: {
             name: true,
           },
+        },
+      },
+      orderBy: {
+        like: {
+          _count: true,
         },
       },
     });

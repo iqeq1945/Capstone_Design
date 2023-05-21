@@ -21,13 +21,32 @@ export const Create = async (req, res, next) => {
 export const Get = async (req, res, next) => {
   try {
     const response = await HistoryRepository.getMyHistory(req.body);
-    console.log(response);
+
     if (response) {
-      req.body.history = response;
+      res.history = response;
       next();
     } else {
-      req.body.history = none;
+      res.history = none;
       next();
+    }
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+export const CheckMyHistory = async (req, res, next) => {
+  try {
+    const response = await HistoryRepository.getMyHistoryByPost(
+      req.user.id,
+      res.data[0].id
+    );
+    if (response && response.length > 0) {
+      res.json[1] = 1;
+      res.json(res.data);
+    } else {
+      res.data[1] = 0;
+      res.json(res.data);
     }
   } catch (err) {
     console.error(err);

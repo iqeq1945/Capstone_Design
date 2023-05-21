@@ -13,52 +13,82 @@
       class="d-flex flex-column"
       style="margin-left: 15%; margin-right: 15%; margin-top: 100px"
     >
-      <h3 class="contentBoxTop mb-5" style="margin-left: 20%">
-        <span class="border-bottom border-dark">내 작품</span>
+      <h3 class="contentBoxTop mb-3" style="">
+        <span class="border-bottom border-dark">작품</span>
       </h3>
 
       <div
-        class="d-flex my-5 justify-content-center align-items-center bd py-5"
+        class="d-flex ms-5 justify-content-between align-items-center py-5"
+        style="height: 300px; width: 50vw"
       >
-        <img src="<%= novel.image %>" width="10%" alt="" target="_blank" />
-        <div class="d-flex flex-column justify-content ms-3 me-5">
-          <h5 class="ms-3"><%= novel.title %></h5>
+        <img
+          src="<%= novel.image %>"
+          style="height: 200px"
+          alt=""
+          target="_blank"
+        />
+        <div class="d-flex flex-column ms-3 me-3" style="width: 50vw">
+          <h3 class="ms-3"><%= novel.title %></h3>
           <p class="ms-3"><%= novel.author.name %></p>
-          <div class="d-flex mt-5">
-            <button
-              class="btn_ btn-3 me-2 mt-auto"
-              onclick="location.href='/novels/update/<%= novel.id %>'"
-            >
-              <span>작품 정보 수정</span>
-            </button>
+          <p class="ms-3"><%= novel.cycle %>-연재</p>
+          <p class="ms-3">관심 <%= novel.like.length %></p>
+        </div>
+        <div class="d-flex align-items-between" style="height: 100%">
+          <button
+            class="btn_ btn-3 me-2 mt-auto"
+            onclick="location.href='/novels/update/<%= novel.id %>'"
+          >
+            <span>작품 정보 수정</span>
+          </button>
 
-            <button
-              class="btn_ btn-3 me-2 mt-auto"
-              data-bs-toggle="modal"
-              data-bs-target="#staticModal"
-              data-id="<%= novel.id %>"
-            >
-              <span>작품 삭제</span>
-            </button>
+          <button
+            class="btn_ btn-3 me-2 mt-auto"
+            data-bs-toggle="modal"
+            data-bs-target="#staticModal"
+            data-id="<%= novel.id %>"
+          >
+            <span>작품 삭제</span>
+          </button>
 
+          <button
+            class="btn_ btn-3 mt-auto"
+            onclick="location.href='/posts/new/<%= novel.id %>'"
+          >
+            <span>작품 연재 하기</span>
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="d-flex mb-3">
+        <small>연재 (<%= novel.post.length %>)</small>
+      </div>
+      <div class="d-flex flex-column">
+        <% novel.post.forEach(function(post,idx){%>
+        <div
+          class="d-flex py-2 px-3 bg_gray justify-content-between border-bottom"
+          style="font-size: 15px; width: 53vw"
+        >
+          <div class="d-flex flex-column">
+            <span> <%= post.title %> </span>
+            <span><%= post.updatedAt.toLocaleDateString() %></span>
+          </div>
+          <div class="d-flex">
             <button
-              class="btn_ btn-3 mt-auto"
-              onclick="location.href='/posts/new/<%= novel.id %>'"
+              class="btn btn-primary mx-2"
+              onclick="location.href='/posts/view/author/<%= post.id %>'"
             >
-              <span>작품 연재 하기</span>
+              내용 보기
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="location.href='/posts/update/<%= post.id %>'"
+            >
+              내용 수정
             </button>
           </div>
         </div>
+        <% }); %>
       </div>
-
-      <button
-        type="button"
-        class="btn_ btn-1 ms-auto me-5"
-        style="width: 150px"
-        onclick="location.href='/novels'"
-      >
-        새 작품 쓰기
-      </button>
     </div>
 
     <div

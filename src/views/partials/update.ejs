@@ -14,7 +14,7 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
 <script src="https://cdn.jsdelivr.net/npm/@sotaproject/strikethrough"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/editorjs-html@3.4.0/build/edjsHTML.js"></script>
-
+<%= console.log(post, data) %>
 <div
   class="d-flex align-items-center justify-content-between mx-auto title"
   style="max-width: 650px"
@@ -25,6 +25,7 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
     name="sub"
     id="sub"
     placeholder="제목을 입력하세요"
+    value="<%= post.title %>"
   />
   <button id="submit-button" class="btn btn-success">제출</button>
 </div>
@@ -32,18 +33,27 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
 <div class="my-5" id="editorjs"></div>
 
 <pre id="output"></pre>
-<form action="/posts/new" method="post" id="form">
+<form action="/posts/update/<%= post.id %>?_method=PUT" method="post" id="form">
   <input
     type="hidden"
     id="authorId"
     name="authorId"
     value="<%= currentUser.id %>"
   />
-  <input type="hidden" id="novelId" name="novelId" value="<%= novelId %>" />
+  <input type="hidden" id="postId" name="postId" value="<%= post.id %>" />
+  <input
+    type="hidden"
+    id="novelId"
+    name="novelId"
+    value="<%= post.novelId %>"
+  />
   <input type="hidden" id="content" name="content" value="" />
   <input type="hidden" id="title" name="title" value="" />
 </form>
 <script>
+  let str = "<%= JSON.stringify(post.content) %>";
+  str = str.replaceAll("&#34;", '"');
+  data = JSON.parse(str);
   const editor = new EditorJS({
     /**
      * Id of Element that should contain the Editor
@@ -55,6 +65,7 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
      * Available Tools list.
      * Pass Tool's class or Settings object for each Tool you want to use
      */
+    data: data,
     tools: {
       header: {
         class: Header,
@@ -136,6 +147,7 @@ https://cdn.jsdelivr.net/npm/simple-image-editorjs@1.4.0/dist/bundle.min.js
   function uploadImage(file) {
     let form_data = new FormData();
     form_data.append("file", file);
+    console.log(file);
     return new Promise((resolve, reject) => {
       $.ajax({
         data: form_data,

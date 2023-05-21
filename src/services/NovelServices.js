@@ -53,13 +53,15 @@ export const UpdateNovel = async (req, res, next) => {
       res.data = resFormat.fail(403, "작가의 정보가 존재하지 않습니다.");
       return res.render("novels/new", { errors: res.data.message });
     }
-
-    let data = updateOption(req.body);
-    const response = await NovelRepository.updateNovel(data, req.body.novelId);
+    const data = updateOption(req.body);
+    const response = await NovelRepository.updateNovel(
+      data,
+      parseInt(req.body.novelId, 10)
+    );
     if (response) {
-      return res.render("novels/index", { data });
+      return res.redirect("/novels/" + req.body.novelId);
     } else {
-      return res.redirect("/novels");
+      return res.redirect("/novels/detail/" + req.body.novelId);
     }
   } catch (err) {
     console.error(err);
@@ -111,9 +113,27 @@ export const GetList = async (req, res, next) => {
       req.params.category != ("전체" || none) ? req.params.category : undefined;
     const response = await NovelRepository.findList(req.params.category);
     if (response) {
-      res.render("novels/category", { data: response });
+      res.render("novels/category", {
+        data: response,
+        category: req.params.category,
+      });
     } else {
       return res.redirect("검색 실패");
+    }
+  } catch (err) {
+    console.error(err);
+    next();
+  }
+};
+
+export const GetListWithLike = async (req, res, next) => {
+  try {
+    const response = await NovelRepository.findByIdwithLike();
+    if (response) {
+      res.data = response;
+      next();
+    } else {
+      return res.redirect("실패");
     }
   } catch (err) {
     console.error(err);
