@@ -149,3 +149,20 @@ export const findByauthor = async (authorId) => {
     console.error(err);
   }
 };
+
+export const checkByAuthor = async (id, authorId) => {
+  try {
+    return await prisma.novel.findMany({
+      where: { AND: [{ id }, { authorId }] },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

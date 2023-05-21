@@ -3,7 +3,7 @@ import * as PostServices from "../services/PostServices";
 import * as HistoryServices from "../services/HistoryServices";
 import * as AuthHandler from "../middlewares/AuthHandler";
 import { upload } from "../config/s3";
-
+import * as PostValidation from "../validation/PostValidation";
 const Router = express.Router();
 
 Router.get("/", AuthHandler.isLoggedIn, function (req, res) {
@@ -17,6 +17,7 @@ Router.get("/new/:novelId", AuthHandler.isLoggedIn, function (req, res) {
 Router.post(
   "/new",
   AuthHandler.isLoggedIn,
+  PostValidation.CreateRequestValid,
   PostServices.CreatePost,
   function (req, res) {
     res.render("novels/detail/" + req.novelId, {
@@ -40,6 +41,7 @@ Router.get(
 
 Router.put(
   "/update/:id",
+  PostValidation.CreateRequestValid,
   AuthHandler.isLoggedIn,
   PostServices.UpdatePost,
   function (req, res) {

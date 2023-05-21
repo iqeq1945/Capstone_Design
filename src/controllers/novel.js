@@ -3,6 +3,8 @@ import * as NovelServices from "../services/NovelServices";
 import * as AuthHandler from "../middlewares/AuthHandler";
 import { upload } from "../config/s3";
 import * as ImageServices from "../services/ImageServices";
+import * as NovelValidation from "../validation/NovelValidation";
+
 const Router = express.Router();
 
 Router.get(
@@ -10,7 +12,6 @@ Router.get(
   AuthHandler.isLoggedIn,
   NovelServices.GetInfo,
   function (req, res, next) {
-    console.log(req.novel);
     res.render("novels/index", { novel: req.novel });
   }
 );
@@ -31,6 +32,7 @@ Router.get("/", AuthHandler.isLoggedIn, function (req, res) {
 Router.post(
   "/",
   AuthHandler.isLoggedIn,
+  NovelValidation.CreateRequestValid,
   upload.single("upload"),
   NovelServices.CreateNovel
 );
@@ -47,6 +49,7 @@ Router.get(
 Router.put(
   "/update/:id",
   AuthHandler.isLoggedIn,
+  NovelValidation.UpdateRequestValid,
   upload.single("upload"),
   NovelServices.UpdateNovel
 );

@@ -3,6 +3,8 @@ import * as AuthHandler from "../middlewares/AuthHandler";
 import * as UserServices from "../services/UserServices";
 import * as NovelServices from "../services/NovelServices";
 import * as ImageServices from "../services/ImageServices";
+import * as AuthValidation from "../validation/AuthValidation";
+
 const Router = express.Router();
 
 Router.get("/", NovelServices.GetListWithLike, function (req, res) {
@@ -14,7 +16,12 @@ Router.get("/login", AuthHandler.isNotLoggedIn, function (req, res) {
 });
 
 Router.get("/logout", AuthHandler.isLoggedIn, UserServices.LogOut);
-Router.post("/login", AuthHandler.isNotLoggedIn, UserServices.Login);
+Router.post(
+  "/login",
+  AuthHandler.isNotLoggedIn,
+  AuthValidation.LoginRequestValid,
+  UserServices.Login
+);
 
 Router.get("/upload", function (req, res) {
   res.render("home/upload");

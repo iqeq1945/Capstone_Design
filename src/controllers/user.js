@@ -4,12 +4,13 @@ import * as CashService from "../services/CashServices";
 import * as NovelServices from "../services/NovelServices";
 import * as HistoryServices from "../services/HistoryServices";
 import * as AuthHandler from "../middlewares/AuthHandler";
+import * as AuthValidation from "../validation/AuthValidation";
 const Router = express.Router();
 
 Router.get("/signup", function (req, res) {
   res.render("user/signup");
 });
-Router.post("/", UserServices.SingUp);
+Router.post("/", AuthValidation.SignUpRequestValid, UserServices.SingUp);
 
 Router.get("/work", AuthHandler.isLoggedIn, NovelServices.GetMyList);
 

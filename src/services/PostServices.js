@@ -49,6 +49,12 @@ export const UpdatePost = async (req, res, next) => {
       res.data = resFormat.fail(403, "제목이 입력되지 않았습니다.");
       return res.send(res.data.message);
     }
+
+    const check = await PostRepository.findById(parseInt(req.body.postId, 10));
+
+    if (check.authorId != req.user.id) {
+      return res.fail(403, "잘못된 접근입니다.");
+    }
     const data = updateOption(req.body);
     const response = await PostRepository.updatePost(
       data,

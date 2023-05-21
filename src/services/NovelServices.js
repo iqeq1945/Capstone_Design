@@ -4,7 +4,6 @@ import { dbNow } from "../utils/dayUtils";
 
 export const CreateNovel = async (req, res, next) => {
   try {
-    console.log(req.body);
     if (!req.body.title) {
       res.data = resFormat.fail(403, "제목이 입력되지 않았습니다.");
       return res.render("novels/new", { errors: res.data.message });
@@ -21,7 +20,7 @@ export const CreateNovel = async (req, res, next) => {
       res.data = resFormat.fail(403, "작가의 정보가 존재하지 않습니다.");
       return res.render("novels/new", { errors: res.data.message });
     }
-    console.log(req.file);
+
     const data = createOption(req.body, req.file, req.user.id);
     const response = await NovelRepository.createNovel(data);
     if (response) {
@@ -52,6 +51,13 @@ export const UpdateNovel = async (req, res, next) => {
     } else if (!req.user) {
       res.data = resFormat.fail(403, "작가의 정보가 존재하지 않습니다.");
       return res.render("novels/new", { errors: res.data.message });
+    }
+    const check = await NovelRepository.findById(
+      parseInt(req.body.novelId, 10)
+    );
+
+    if (check.authorId != req.user.id) {
+      return res.fail(403, "잘못된 접근입니다.");
     }
     const data = updateOption(req.body);
     const response = await NovelRepository.updateNovel(
