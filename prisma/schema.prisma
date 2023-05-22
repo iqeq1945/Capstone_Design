@@ -54,6 +54,7 @@ model Post {
   history   History[]
   star      Star[]
   comment   Comment[]
+  click     Int @default(0)
   @@index([authorId], map: "posts_authorId_fkey")
   @@index([novelId], map: "posts_novelId_fkey")
   @@map("posts")

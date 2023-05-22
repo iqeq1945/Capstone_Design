@@ -65,3 +65,18 @@ export const findNextById = async (id, novelId, take) => {
     console.error(err);
   }
 };
+
+export const click = async (id) => {
+  try {
+    return await prisma.post.update({
+      where: { id },
+      data: {
+        click: {
+          increment: 1,
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

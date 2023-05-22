@@ -30,6 +30,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
   </head>
   <body>
     <nav
@@ -47,6 +51,17 @@
       </div>
       <div class="options">
         <div class="d-flex flex-column align-items-end">
+          <div class="d-flex flex-column align-items-center">
+            <span
+              class="material-symbols-outlined time"
+              style="font-size: 48px; cursor: pointer"
+            >
+              star
+            </span>
+            <span class="click"><%= post.click %></span>
+          </div>
+
+          <br />
           <span
             id="option"
             class="material-symbols-outlined"
@@ -190,13 +205,13 @@
         $(".line").css("margin-bottom", size + `px`);
       }
     });
-
+    /*
     $(".line").click(function () {
       $("#cite").text($(this).text());
       $(".chat_box").fadeIn();
     });
     $(document).mouseup(function () {
       $(".chat_box").fadeOut();
-    });
+    });*/
   </script>
 </html>

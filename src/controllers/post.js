@@ -85,4 +85,6 @@ Router.get(
   HistoryServices.CheckMyHistory
 );
 
+Router.get("/click/:postId", PostServices.Click);
+
 export default Router;

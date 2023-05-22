@@ -127,6 +127,18 @@ export const MovePage = async (req, res, next) => {
   }
 };
 
+export const Click = async (req, res, next) => {
+  try {
+    const response = await PostRepository.click(
+      parseInt(req.params.postId, 10)
+    );
+    return res.json(1);
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
 const createOption = (bodydata) => {
   // DB data 옵션 설정.
   const dataOption = {
