@@ -56,7 +56,7 @@
             style="cursor: pointer"
             width="28px"
             data-id="<%= novel.id %>"
-            class="material-symbols-outlined"
+            class="material-symbols-outlined buy"
             onclick="LikeOn()"
           />
 
@@ -87,29 +87,46 @@
             </div>
             <div><span class="px-1 py-1 round">공지</span></div>
           </div>
-          <span>총 <%= novel.post.length %>화</span>
+          <div class="d-flex justify-content-between">
+            <span>총 <%= novel.post.length %>화</span>
+            <div>
+              <span id="look1" class="look look_chk" style="font-size: 12px"
+                >최신순</span
+              >
+              <span id="look2" class="look" style="font-size: 12px"
+                >과거순</span
+              >
+            </div>
+          </div>
+
           <hr />
-          <ul class="list-group">
+          <ul class="list-group" id="look_post">
             <% novel.post.forEach(function(post,idx){ %> <%
             if(currentUser.history.find(e => e.postId === post.id )) {%>
-            console.log(e);
+
             <li
               data-title="<%= post.title %>"
               data-id="<%= post.id %>"
-              class="list-group-item d-flex align-items-center justify-content-between history"
+              class="list-group-item d-flex align-items-center justify-content-between history buy border"
               onclick="location.href='/posts/view/<%= post.id %>'"
             >
-              <span> <%= post.title %> </span>
-              <span><%= post.updatedAt.toLocaleDateString() %></span>
+              <div class="d-flex flex-column" style="font-size: 15px">
+                <span> <%= post.title %> </span>
+                <span><%= post.updatedAt.toLocaleDateString() %></span>
+              </div>
+
+              <span style="font-size: 12px">소장</span>
             </li>
             <%} else{ %>
             <li
               data-title="<%= post.title %>"
               data-id="<%= post.id %>"
-              class="list-group-item d-flex align-items-center justify-content-between posts"
+              class="list-group-item d-flex align-items-center justify-content-between posts border"
             >
-              <span> <%= post.title %> </span>
-              <span><%= post.updatedAt.toLocaleDateString() %></span>
+              <div class="d-flex flex-column" style="font-size: 15px">
+                <span> <%= post.title %> </span>
+                <span><%= post.updatedAt.toLocaleDateString() %></span>
+              </div>
             </li>
             <%}}) %>
           </ul>
@@ -193,6 +210,10 @@
 
     $("#close").click(function () {
       $(".modal_box2").fadeOut();
+    });
+    $(".look").click(function () {
+      $(".look").toggleClass("look_chk");
+      $("#look_post").toggleClass("flex-column-reverse");
     });
   </script>
 </html>

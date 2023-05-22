@@ -38,6 +38,48 @@ export const getMyHistory = async (id) => {
   try {
     return await prisma.history.findMany({
       where: { buyerId: id },
+      distinct: ["novelId"],
+      include: {
+        post: true,
+        novel: {
+          include: {
+            author: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getMyHistoryByPost = async (id, postId) => {
+  try {
+    return await prisma.history.findMany({
+      where: {
+        AND: [
+          {
+            buyerId: id,
+          },
+          { postId: postId },
+        ],
+      },
+      include: {
+        post: true,
+        novel: {
+          include: {
+            author: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
   } catch (err) {
     console.error(err);

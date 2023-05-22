@@ -11,7 +11,7 @@
       <form action="/novels" method="post" enctype="multipart/form-data">
         <div class="form-group my-1">
           연재 주기
-          <label><input type="checkbox" name="cycle" value="월" /> 월</label>
+          <label><input type="checkbox" name="cycle" value="월" required/> 월</label>
           <label><input type="checkbox" name="cycle" value="화" /> 화</label>
           <label><input type="checkbox" name="cycle" value="수" /> 수</label>
           <label><input type="checkbox" name="cycle" value="목" /> 목</label>
@@ -25,7 +25,7 @@
         <div class="form-group my-1">
           장르
           <label
-            ><input type="radio" name="category" value="판타지" /> 판타지</label
+            ><input type="radio" name="category" value="판타지"  required/> 판타지</label
           >
           <label
             ><input type="radio" name="category" value="로맨스" /> 로맨스</label
@@ -42,6 +42,7 @@
             name="title"
             value=""
             class="form-control"
+            required
           />
         </div>
 
@@ -52,6 +53,7 @@
             name="content"
             rows="5"
             class="form-control"
+            required
           ></textarea>
         </div>
         <div class="form-group my-3">

@@ -54,13 +54,13 @@ model Post {
   history   History[]
   star      Star[]
   comment   Comment[]
+  click     Int @default(0)
   @@index([authorId], map: "posts_authorId_fkey")
   @@index([novelId], map: "posts_novelId_fkey")
   @@map("posts")
 }
 
 model History {
-  id        Int      @id @default(autoincrement())
   buyerId   Int
   novelId   Int
   postId    Int
@@ -69,8 +69,7 @@ model History {
   novel     Novel @relation(fields: [novelId], references: [id])
   post      Post     @relation(fields: [postId], references: [id])
 
-  @@index([buyerId], map: "histories_buyerId_fkey")
-  @@index([postId], map: "histories_postId_fkey")
+  @@id([buyerId,postId], name:"historyKey")
   @@map("histories")
 }
 
@@ -114,7 +113,7 @@ model Comment {
   createdAt DateTime
   updatedAt DateTime
   content String
-
+  cite String
   @@id([userId, postId], name:"comment")
   @@map("comments")
 }

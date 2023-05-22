@@ -31,8 +31,8 @@ a {
 .options {
   position: absolute;
   width: 100%;
-  padding-right: 20%;
-  top: 750px;
+  padding-right: 15%;
+  top: 730px;
 }
 #option {
   cursor: pointer;
@@ -73,5 +73,74 @@ p {
 }
 
 .line {
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: #000;
+  display: inline-block;
+}
+
+.line:after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px lightgray;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+  transform-origin: 0% 50%;
+}
+
+.line:hover:after {
+  transform: scaleX(1);
+}
+.chat_box {
+  position: fixed;
+  background-color: lightgray;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.chat_content {
+  width: 500px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+  padding: 20px 15px;
+  line-height: 23px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px #999;
+}
+
+.move_box {
+  position: fixed;
+  background-color: lightgray;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.move_content {
+  width: 500px;
+  height: 250px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+  left: 50%;
+  top: 30%;
+  margin-left: -200px;
+  padding: 20px 15px;
+  line-height: 23px;
+
+  box-shadow: 1px 1px 1px 1px #999;
+}
+
+span.move:hover {
+  color: lightblue;
+}
+
+.emoji {
   margin-bottom: 20px;
 }

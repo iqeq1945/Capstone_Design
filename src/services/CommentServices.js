@@ -1,15 +1,15 @@
-import * as HistoryRepository from "../repositories/HistroyRepository";
+import * as CommentRepository from "../repositories/CommentRepository";
 import { dbNow } from "../utils/dayUtils";
 
 export const Create = async (req, res, next) => {
   try {
     const data = createOption(req.body, req.user.id);
-    const response = await HistoryRepository.createHistory(data);
+    const response = await CommentRepository.createComment(data);
     if (response) {
       res.redirect("/posts/view/" + parseInt(req.body.postId, 10));
       next();
     } else {
-      res.redirect("/novels/" + parseInt(req.body.novelId, 10));
+      res.redirect("/posts/view/" + parseInt(req.body.postId, 10));
       next();
     }
   } catch (err) {
@@ -20,13 +20,13 @@ export const Create = async (req, res, next) => {
 
 export const Get = async (req, res, next) => {
   try {
-    const response = await HistoryRepository.getMyHistory(req.body);
-
+    const response = await CommentRepository.getMyComment(req.body);
+    console.log(response);
     if (response) {
-      res.history = response;
+      req.body.comment = response;
       next();
     } else {
-      res.history = none;
+      req.body.comment = none;
       next();
     }
   } catch (err) {
@@ -35,18 +35,17 @@ export const Get = async (req, res, next) => {
   }
 };
 
-export const CheckMyHistory = async (req, res, next) => {
+export const GetList = async (req, res, next) => {
   try {
-    const response = await HistoryRepository.getMyHistoryByPost(
-      req.user.id,
-      res.data[0].id
+    const response = await CommentRepository.getListComment(
+      parseInt(req.body.postId, 10)
     );
-    if (response && response.length > 0) {
-      res.json[1] = 1;
-      res.json(res.data);
+    if (response) {
+      res.comment = response;
+      next();
     } else {
-      res.data[1] = 0;
-      res.json(res.data);
+      res.comment = none;
+      next();
     }
   } catch (err) {
     console.error(err);
@@ -54,18 +53,17 @@ export const CheckMyHistory = async (req, res, next) => {
   }
 };
 
-const createOption = (bodydata, buyerId) => {
+const createOption = (bodydata, userId) => {
   // DB data 옵션 설정.
   const dataOption = {
-    buyer: {
-      connect: { id: parseInt(buyerId, 10) },
+    userId: {
+      connect: { id: parseInt(userId, 10) },
     },
     post: {
       connect: { id: parseInt(bodydata.postId, 10) },
     },
-    novel: {
-      connect: { id: parseInt(bodydata.novelId, 10) },
-    },
+    content: bodydata.content,
+    cite: bodydata.cite,
     createdAt: dbNow(),
   };
 

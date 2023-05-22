@@ -49,63 +49,17 @@
       </div>
       <div class="d-flex my-5 flex-column">
         <h4 class="border-bottom"style="width: 5%">랭킹</h4>
-        <div class="d-flex flex-wrap justify-content-between my-2">
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
+        <div class="d-flex flex-wrap justify-content-around  my-2">
+          <% novel.forEach(function(post,idx){ %>
+            <div class="card my-1" style="width: 20%; cursor: pointer;" onclick="location.href='/novels/<%= post.id %>'">
+              <img class="card-img-top" src="<%= post.image %>" alt="Card image cap">
+              <div class="card-body border-top">
+                <h5 class="card-title"><%= post.title %></h5>
+                <p class="card-text"><%= post.author.name %></p>
+              </div>
             </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
-          <div class="card m-1" style="width: 23%;">
-            <img class="card-img-top" src="/img/jandy_logo.png" alt="Card image cap">
-            <div class="card-body border-top">
-              <h5 class="card-title">책제목</h5>
-              <p class="card-text">작가 및 별점</p>
-            </div>
-          </div>
+            <%}); %>
+          
         </div>
       </div>
   </body>

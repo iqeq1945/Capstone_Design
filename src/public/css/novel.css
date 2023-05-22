@@ -46,7 +46,7 @@ li.posts {
 }
 
 .bg_gray {
-  background-color: #f0f0f0;
+  background-color: #f7f7f7;
 }
 
 .profile {
@@ -57,4 +57,13 @@ li.posts {
 
 .material-symbols-outlined-before {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+span.look {
+  cursor: pointer;
+  color: gray;
+}
+
+span.look_chk {
+  color: black;
 }
