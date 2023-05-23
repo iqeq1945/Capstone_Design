@@ -20,7 +20,7 @@ Router.post(
   PostValidation.CreateRequestValid,
   PostServices.CreatePost,
   function (req, res) {
-    res.render("novels/detail/" + req.novelId, {
+    res.render("/novels/detail/" + req.novelId, {
       post: req.post,
       content: req.content,
     });
