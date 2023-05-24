@@ -2,13 +2,6 @@ import { check } from "express-validator";
 import validationFunction from "./validationFunction";
 
 export const CreateRequestValid = async (req, res, next) => {
-  await check("authorId")
-    .notEmpty()
-    .withMessage("authorId가 존재하지 않습니다.")
-    .bail()
-    .isNumeric()
-    .withMessage("authorId에는 숫자가 들어와야 합니다.")
-    .run(req);
   await check("novelId")
     .notEmpty()
     .withMessage("novelId가 존재하지 않습니다.")
