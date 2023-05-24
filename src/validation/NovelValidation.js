@@ -2,20 +2,7 @@ import { check } from "express-validator";
 import validationFunction from "./validationFunction";
 
 export const CreateRequestValid = async (req, res, next) => {
-  await check("authorId")
-    .notEmpty()
-    .withMessage("authorId가 존재하지 않습니다.")
-    .bail()
-    .isNumeric()
-    .withMessage("authorId에는 숫자가 들어와야 합니다.")
-    .run(req);
-  await check("novelId")
-    .notEmpty()
-    .withMessage("novelId가 존재하지 않습니다.")
-    .bail()
-    .isNumeric()
-    .withMessage("novelId에는 숫자가 들어와야 합니다.")
-    .run(req);
+  console.log(req.body);
   await check("title")
     .exists()
     .withMessage("title가 존재하지 않습니다")
@@ -39,12 +26,6 @@ export const CreateRequestValid = async (req, res, next) => {
     .withMessage("category가 존재하지 않습니다")
     .isString()
     .withMessage("category은 String 형식에 맞게 들어와야 합니다.")
-    .run(req);
-  await check("image")
-    .exists()
-    .withMessage("image가 존재하지 않습니다")
-    .isString()
-    .withMessage("image은 String 형식에 맞게 들어와야 합니다.")
     .run(req);
   validationFunction(req, res, next);
 };

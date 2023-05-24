@@ -32,8 +32,9 @@ Router.get("/", AuthHandler.isLoggedIn, function (req, res) {
 Router.post(
   "/",
   AuthHandler.isLoggedIn,
-  NovelValidation.CreateRequestValid,
   upload.single("upload"),
+  NovelValidation.CreateRequestValid,
+
   NovelServices.CreateNovel
 );
 

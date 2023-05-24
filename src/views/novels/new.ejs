@@ -8,10 +8,10 @@
   <body>
     <div class="container mb-3 mt-5">
       <h3>새 작품 등록</h3>
-      <form action="/novels" method="post" enctype="multipart/form-data">
+      <form id="form"action="/novels" method="post" enctype="multipart/form-data">
         <div class="form-group my-1">
           연재 주기
-          <label><input type="checkbox" name="cycle" value="월" required/> 월</label>
+          <label><input type="checkbox" name="cycle" value="월" /> 월</label>
           <label><input type="checkbox" name="cycle" value="화" /> 화</label>
           <label><input type="checkbox" name="cycle" value="수" /> 수</label>
           <label><input type="checkbox" name="cycle" value="목" /> 목</label>
@@ -19,7 +19,7 @@
           <label><input type="checkbox" name="cycle" value="토" /> 토</label>
           <label><input type="checkbox" name="cycle" value="일" /> 일</label>
           <label
-            ><input type="checkbox" name="cycle" value="자유" /> 자유</label
+            ><input class="chk"type="checkbox" name="cycle" value="자유" checked/> 자유</label
           >
         </div>
         <div class="form-group my-1">
@@ -62,12 +62,13 @@
             id="upload"
             name="upload"
             onchange="readURL(this);"
+            required
           />
         </div>
         <img class="form-group my-1" id="preview"></img>
         <div>
           <a class="btn btn-primary" href="/users">Back</a>
-          <button type="submit" class="btn btn-primary">등록하기</button>
+          <button type="submit" class="btn btn-primary" onclick="chk();" >등록하기</button>
         </div>
       </form>
     </div>
@@ -87,6 +88,11 @@
         reader.readAsDataURL(input.files[0]);
       } else {
         document.getElementById("preview").src = "";
+      }
+    }
+    function chk(){
+      if(!$('input[name=cycle]').is(':checked')){
+        $('.chk').prop('checked', true);
       }
     }
   </script>
