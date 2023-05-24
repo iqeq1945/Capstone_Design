@@ -18,8 +18,11 @@ export const CreateRequestValid = async (req, res, next) => {
   await check("cycle")
     .exists()
     .withMessage("cycle가 존재하지 않습니다")
-    .isString()
-    .withMessage("cycle 은 String 형식에 맞게 들어와야 합니다.")
+    .custom((cycle) => {
+      if (typeof cycle === "string" || Array.isArray(cycle)) return true;
+      else false;
+    })
+    .withMessage("cycle 은 배열 형식에 맞게 들어와야 합니다.")
     .run(req);
   await check("category")
     .exists()

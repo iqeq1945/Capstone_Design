@@ -25,7 +25,7 @@ model User {
 
 model Novel {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(200) @unique
+  title     String   @db.VarChar(200) 
   cycle     String
   content   String
   category  String
