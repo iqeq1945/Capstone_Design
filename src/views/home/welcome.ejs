@@ -51,6 +51,7 @@
         <h4 class="border-bottom"style="width: 5%">랭킹</h4>
         <div class="d-flex flex-wrap justify-content-around  my-2">
           <% novel.forEach(function(post,idx){ %>
+            <% if(idx >3) return; %>
             <div class="card my-1" style="width: 20%; cursor: pointer;" onclick="location.href='/novels/<%= post.id %>'">
               <img class="card-img-top" src="<%= post.image %>" alt="Card image cap">
               <div class="card-body border-top">
