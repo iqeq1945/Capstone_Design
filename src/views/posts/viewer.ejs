@@ -260,14 +260,14 @@
       }
     });
     /*
-    $(".line").click(function () {
-      $("#cite").text($(this).text());
-      $(".chat_box").fadeIn();
-    });
-    $(document).mouseup(function () {
-      $(".chat_box").fadeOut();
-    });
-*/
+        $(".line").click(function () {
+          $("#cite").text($(this).text());
+          $(".chat_box").fadeIn();
+        });
+        $(document).mouseup(function () {
+          $(".chat_box").fadeOut();
+        });
+    */
     $(document).mouseup(function () {
       $(".move_box").fadeOut();
     });
@@ -309,5 +309,10 @@
     $("#ok_move").click(function () {
       $("#move_form").submit();
     });
+
+    window.localStorage.setItem(
+      "<%= currentUser.id %>" + "_" + "<%= post.novel.id %>",
+      "<%= post.id %>"
+    );
   </script>
 </html>

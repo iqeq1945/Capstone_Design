@@ -31,4 +31,7 @@ Router.post("/upload", ImageServices.upload.single("upload"), (req, res) => {
   res.send(req.file);
 });
 
+Router.get("/session", function (req, res) {
+  res.send(req.session);
+});
 export default Router;
